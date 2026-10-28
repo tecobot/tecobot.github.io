@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TeCoBot</title>
+<meta name="description" content="Modular tensegrity continuum robots that bend, collapse, and team up by docking, self-reconfiguring into task-adaptive morphologies for cooperative manipulation and locomotion.">
+<meta property="og:title" content="TeCoBot: Tensegrity Continuum Robots">
+<meta property="og:description" content="Modular tensegrity continuum robots that self-reconfigure into chains, loops and branches for cooperative manipulation and locomotion.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tecobot.github.io/">
+<meta property="og:image" content="https://tecobot.github.io/media/og-elephant.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Six TeCoBots docked into an elephant">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tecobot.github.io/media/og-elephant.jpg">
+<link rel="canonical" href="https://tecobot.github.io/">
+<script>
+  /* Night unless the visitor has chosen day; set before anything draws. */
+  (function(){ var t=null; try{ t=localStorage.getItem('tecobot-theme'); }catch(e){}
+    document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark'); })();
+</script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tecobot.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-tecobot="hero" class="splashing">
+<header class="topbar"><div class="in">
+  <a class="brand" href="./">TeCoBot</a>
+  <nav aria-label="Site">
+    <a href="./" aria-current="page">Overview</a>
+    <a href="play/">Play</a>
+    <a href="build/">Build</a>
+    <a class="wideOnly" href="paper/">Paper</a>
+    <a class="wideOnly" href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
+  </nav>
+  <div class="themeSwitch" role="group" aria-label="Theme">
+    <button type="button" data-set-theme="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Day</span></button>
+    <button type="button" data-set-theme="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span>Night</span></button>
+  </div>
+</div></header>
+<div class="wrap">
+  <div class="pageHead">
+    <h1>Play with TeCoBots</h1>
+  </div>
+
+  <div class="layout">
+    <div class="view" id="view">
+      <canvas id="c" role="img" aria-label="TeCoBot tensegrity continuum robots arranged in a selectable morphology"></canvas>
+      <div class="tag" id="tag"></div>
+      <p class="caveat">for visualization purposes</p>
+      <div class="splash" id="splash">
+        <div class="splashInner">
+          <h1 class="splashTitle">TeCoBots</h1>
+          <p class="splashSub">Modular tensegrity continuum robots that bend, collapse, and team up by docking.</p>
+          <p class="paperLine">
+            <a class="paperTitle" href="https://arxiv.org/abs/2608.27221" target="_blank" rel="noopener">Tensegrity Continuum Robots Enable Task-Adaptive
+            Morphologies for Cooperative Behaviors</a><br>
+            <span class="paperVenue">Accepted for publication in a peer-reviewed journal</span>
+          </p>
+          <p class="authors">
+            <!-- add each author's page as an href when you have them -->
+            <a href="https://mahmud-hasans.github.io/" target="_blank" rel="noopener">M. H. Saikot</a>, S. Spiegel, S. A. Kariyawasam,
+            A. Stefka, J. Chrisler, J. Zhao
+          </p>
+          <p class="affil">Adaptive Robotics Lab, Colorado State University</p>
+          <div class="linkrow">
+            <a href="https://arxiv.org/abs/2608.27221" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>arXiv</a>
+            <!-- RELEASE DAY: point PDF at the journal version, link the supplementary files, and drop class="soon" -->
+            <a href="https://arxiv.org/pdf/2608.27221" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>PDF</a>
+            <a href="#videos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>Videos</a>
+            <a class="soon" aria-disabled="true" title="Available when the journal version is published"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h10l6 6v10H4z"/><path d="M8 13h8M8 17h5"/></svg>Supplementary</a>
+            <a href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>Code</a>
+            <a href="#cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h4v6H5V9a2 2 0 0 1 2-2zM15 7h4v6h-6V9a2 2 0 0 1 2-2zM9 13c0 2-1 4-3 4M17 13c0 2-1 4-3 4"/></svg>Cite</a>
+          </div>
+          <div class="heroCtas">
+            <a class="playBtn" id="play" href="play/">Play with TeCoBots</a>
+            <a class="ghostBtn" href="build/">Build one</a>
+          </div>
+          <p class="scrollCue">scroll to read more &darr;</p>
+        </div>
+      </div>
+    </div>
+    <div class="side" id="side">
+      <h2>Robot</h2>
+      <div class="row"><span>Carbon-fibre rod</span><span id="f-rod"></span></div>
+      <div class="row"><span>Spacer disk</span><span id="f-disk"></span></div>
+      <div class="row"><span>Modules</span><span id="f-mod"></span></div>
+      <div class="row"><span>Body length</span><span id="f-body"></span></div>
+      <div class="row"><span>Overall length</span><span id="f-total"></span></div>
+    </div>
+  </div>
+
+  <div id="below">
+  <div class="controls">
+    <label>Category
+      <select id="cat"></select>
+    </label>
+    <label>Configuration
+      <select id="morph"></select>
+    </label>
+    <label>Palette
+      <select id="pal">
+        <option value="studio">Studio (on black)</option>
+        <option value="paper">Paper (light)</option>
+        <option value="day">Day (on grey)</option>
+      </select>
+    </label>
+    <label>Zoom <input type="range" id="zoom" min="60" max="500" value="100"></label>
+    <button type="button" id="labels">Key</button>
+    <button type="button" id="freerot" title="Let the view tip past its normal limits">Free Move</button>
+    <button type="button" id="panmode" title="Drag to pan instead of orbit">Pan</button>
+    <button type="button" class="primary" id="save" hidden>Save PNG</button>
+  </div>
+  <div class="controls rig" id="rig" hidden>
+    <strong class="riglabel">Frame</strong>
+    <label>Width <input type="range" id="rig-w" min="25" max="170" value="100"><output id="rig-w-o"></output></label>
+    <label>Depth <input type="range" id="rig-d" min="25" max="220" value="100"><output id="rig-d-o"></output></label>
+    <label>Height <input type="range" id="rig-h" min="50" max="180" value="100"><output id="rig-h-o"></output></label>
+    <span class="rigsep"></span>
+    <strong class="riglabel">Stations</strong>
+    <span id="rig-st"></span>
+    <button type="button" id="rig-reset">Reset frame</button>
+  </div>
+  <div class="controls rig" id="cab" hidden>
+    <strong class="riglabel">Cables</strong>
+    <label>Robot <select id="cab-r"></select></label>
+    <label>1 <input type="range" id="cab-1" min="-20" max="140" value="0"><output id="cab-1-o"></output></label>
+    <label>2 <input type="range" id="cab-2" min="-20" max="140" value="0"><output id="cab-2-o"></output></label>
+    <label>3 <input type="range" id="cab-3" min="-20" max="140" value="0"><output id="cab-3-o"></output></label>
+    <button type="button" id="cab-reset">Reset cables</button>
+  </div>
+  <p class="desc" id="desc"></p>
+  <p class="note warn" id="rig-note" hidden></p>
+  <details class="about"><summary>About this page</summary>
+  <p class="note">Drag to orbit, wheel to zoom. <strong>Key</strong> names the parts on the robot
+  itself. <strong>Frame</strong> resizes the cuboid and slides each docking station along the edge
+  it is bolted to. <strong>Cables</strong> drives a robot by its three cable displacements: pull all
+  three together and the body shortens dead straight, pull them unevenly and the difference is what
+  bends it.</p>
+  <p class="note">Where a configuration does not offer the control of one of its robots, that
+  robot&rsquo;s pose is held fixed so a dock cannot come apart under the sliders &mdash; the
+  hardware has no such
+  restriction, and can be driven in ways this page does not reproduce. Nothing here checks for
+  collision. Every dimension comes from the <code>MM</code> block at the top of the source; correct
+  a number there and the whole model follows.</p></details>
+  </div>
+</div>
+<script>
+  // the renderer's palette follows the theme from the first frame
+  document.getElementById('pal').value = document.documentElement.getAttribute('data-theme') === 'light' ? 'day' : 'studio';
+</script>
+
+<main class="content" id="content">
+
+<section class="sec" id="overview" aria-labelledby="h-overview">
+  <h2 id="h-overview">In under a minute</h2>
+  <p class="lead">Three short reels of TeCoBots at work, alone and together (sped up).</p>
+  <div class="reels">
+    <figure class="reel"><video muted loop playsinline preload="none" poster="media/posters/social-2.jpg" data-src="media/video/social-2.mp4" aria-label="Highlight reel 1"></video></figure>
+    <figure class="reel"><video muted loop playsinline preload="none" poster="media/posters/teaser.jpg" data-src="media/video/teaser.mp4" aria-label="Highlight reel 2"></video></figure>
+    <figure class="reel"><video muted loop playsinline preload="none" poster="media/posters/social-3.jpg" data-src="media/video/social-3.mp4" aria-label="Highlight reel 3"></video></figure>
+  </div>
+</section>
+
+<section class="sec" id="abstract" aria-labelledby="h-abstract">
+  <h2 id="h-abstract">Abstract</h2>
+  <p class="lead">Robots that can change their morphologies and behaviors for different tasks and environments hold great promise for adaptable, multifunctional systems. Modular reconfigurable robots (MRRs) can achieve such functionalities by docking and rearranging individual units, but most rely on rigid modules that lack structural compliance, resulting in limited capabilities. Continuum robots offer compliance through flexible backbones, yet they cannot self-reconfigure into task-adaptive multi-robot configurations. Here, we introduce an MRR that unifies the advantages of both architectures by combining a tensegrity-based compliant body with claw-based connection mechanisms. Each robot can manipulate and locomote independently, and multiple robots can self-reconfigure into different morphologies (e.g., chains, loops, branches) for cooperative manipulation and locomotion. We demonstrate the robots’ capability across diverse tasks and environments, including coordinated object manipulation and transport, multimodal locomotion, and loco-manipulation in real-world scenarios. These results lay a foundation for adaptable and multifunctional robotic collectives, with broad potential applications in manufacturing, space exploration, and search-and-rescue operations.</p>
+</section>
+
+<section class="sec" id="ideas" aria-labelledby="h-ideas">
+  <h2 id="h-ideas">What’s new</h2>
+  <p class="lead">Three ideas behind TeCoBot. Open any of them for the details.</p>
+  <div class="ideas">
+    <button class="idea" type="button" aria-expanded="false" aria-controls="idea-modular"><b>Compliant and modular</b><span class="ideaSum">A soft continuum body that can also dock with others and reconfigure.</span><span class="ideaMore">Show details</span></button>
+    <div class="ideaPanel" id="idea-modular" role="region" aria-label="Compliant and modular" hidden>
+      <div class="panelRow">
+        <figure class="paperfig" data-zoom="media/figs/fig2.jpg" data-caption="Figure 2. How one TeCoBot is built." tabindex="0" role="button" aria-label="Enlarge figure 2"><img src="media/figs/fig2-md.jpg" alt="Figure 2: the parts of one TeCoBot: tensegrity modules, cables, base motors, claws and wireless control." loading="lazy"></figure>
+        <div class="prose">
+          <p>Most modular robots use rigid blocks: easy to connect, but limited in flexibility. Continuum robots can bend and deform, but typically operate as single units. TeCoBot brings these capabilities together.</p>
+          <p><b>A compliant body.</b> Four stacked tensegrity modules each contain six carbon-fibre rods held together by a stretchable TPU tendon net. Three cables control bending in any direction, compression, and extension along the body’s length.</p>
+          <p><b>A claw at each end.</b> Each claw works as both a gripper and a connector. The claws can be swapped to suit the task: rubber-sleeved claws for docking and moving, or soft-pad grippers for picking up delicate objects.</p>
+          <p><b>One robot or many.</b> Each TeCoBot can move and manipulate objects independently. Multiple robots can dock into chains, loops, and branches while remaining compliant, allowing the connected group to bend and roll as a single body.</p>
+          <p class="panelLinks"><a href="build/">How it’s built</a><a href="play/">Try it in Play</a></p>
+        </div>
+      </div>
+    </div>
+    <button class="idea" type="button" aria-expanded="false" aria-controls="idea-scalable"><b>Scalable</b><span class="ideaSum">Add modules and it moves farther, without needing more force.</span><span class="ideaMore">Show details</span></button>
+    <div class="ideaPanel" id="idea-scalable" role="region" aria-label="Scalable" hidden>
+  
+  <div class="scaleRow">
+    <h4 class="panelSub">Collapsing</h4>
+    <div class="scaleFigs">
+      <figure class="paperfig" data-zoom="media/figs/scale-stretch.jpg" data-caption="Maximum collapse (axial displacement) for one to four stacked modules." tabindex="0" role="button" aria-label="Enlarge chart"><img src="media/figs/scale-stretch.jpg" alt="Chart: maximum displacement rises from about 60 mm with one module to 260 mm with four, in a straight line." loading="lazy"></figure>
+      <figure class="paperfig" data-zoom="media/figs/scale-stretch-force.jpg" data-caption="Force needed to collapse one (orange), two (blue), three (green) and four (pink) modules." tabindex="0" role="button" aria-label="Enlarge chart"><img src="media/figs/scale-stretch-force.jpg" alt="Chart: force against displacement for one to four modules. Each curve runs farther to the right but all peak at about 23 to 28 N." loading="lazy"></figure>
+    </div>
+    <p class="prose">A single tensegrity module compresses by 60&nbsp;mm, while a stack of four compresses by 260&nbsp;mm—more than four times as far. The force–displacement plot shows the results for different numbers of tensegrity modules. Adding modules increases the compression distance, while the peak force remains around 23–28&nbsp;N.</p>
+  </div>
+  <div class="scaleRow">
+    <h4 class="panelSub">Bending</h4>
+    <div class="scaleFigs">
+      <figure class="paperfig" data-zoom="media/figs/scale-bend.jpg" data-caption="Maximum bend angle for one to four stacked modules." tabindex="0" role="button" aria-label="Enlarge chart"><img src="media/figs/scale-bend.jpg" alt="Chart: maximum bend angle rises from about 60 degrees with one module to about 220 degrees with four." loading="lazy"></figure>
+      <figure class="paperfig" data-zoom="media/figs/scale-bend-force.jpg" data-caption="Force needed to bend one (orange), two (blue), three (green) and four (pink) modules." tabindex="0" role="button" aria-label="Enlarge chart"><img src="media/figs/scale-bend-force.jpg" alt="Chart: force against bend angle for one to four modules. Each curve reaches a larger angle but all end at about 16 to 18 N." loading="lazy"></figure>
+    </div>
+    <p class="prose">Bending follows a similar pattern. A single module bends by about 60°, while a stack of four reaches about 220°, curling back past the downward position (&gt;180°). Adding modules increases the bending range, while the required force remains around 16–18&nbsp;N.</p>
+  </div>
+  <p class="prose takeaway"><b>Why it matters.</b> Stacking more modules gives the robot a greater range of motion without needing larger motors at its base.</p>
+
+    </div>
+    <button class="idea" type="button" aria-expanded="false" aria-controls="idea-docking"><b>Docks three ways</b><span class="ideaSum">One claw connects end to end, at an angle, or anywhere along another robot.</span><span class="ideaMore">Show details</span></button>
+    <div class="ideaPanel" id="idea-docking" role="region" aria-label="Docking" hidden>
+      <p class="prose panelLead">The claw is the only connector. Because the robots stay compliant after they join, a docked group can still bend, shorten, roll and climb as one body. With claw-to-claw docks alone, one robot can connect to as many as six others.</p>
+  <div class="modes">
+    <div class="mode"><h4>Three to three</h4><p>Two closed claws interleave, every finger landing between two of the other’s, so the joint carries load like a continuous body.</p><span class="num">42.9 N</span><span>peak holding force, latex sleeves</span><a href="play/#dock33">See it in Play</a></div>
+    <div class="mode"><h4>Three to one</h4><p>One claw spreads open and another closes on a single finger. The bodies meet at an angle, which is how branches and Y-shapes form.</p><span class="num">3-way</span><span>a spread claw can take three robots at once</span><a href="play/#dock31">See it in Play</a></div>
+    <div class="mode"><h4>Claw to body</h4><p>A claw closes on another robot’s spacer disk or tendon lattice, attaching anywhere along its length instead of only at the ends.</p><span class="num">29.8 N</span><span>holding force on the tensegrity, at 1&nbsp;A</span><a href="play/#body">See it in Play</a></div>
+  </div>
+  <h4 class="panelSub">Docking without a human</h4>
+  <p class="prose muted small">In the paper, reconfiguration is teleoperated. As a proof of concept, a robot with a Raspberry Pi 5 and camera in its top module finds ArUco markers on another robot, corrects its heading with the cables, inches forward and closes its claw when the marker says it is in place.</p>
+  <div class="clips two">
+<figure class="clip wide"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/auto-dock.jpg" data-src="media/clips/auto-dock.mp4" aria-label="Closed-loop autonomous docking"></video></div>
+<figcaption><b>Closed-loop autonomous docking</b><span>Top view, with the onboard camera inset (sped up).</span></figcaption></figure>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="imagine" aria-labelledby="h-imagine">
+  <div class="imagine">
+    <a class="imagineFig" href="play/#C6" aria-label="Open the elephant in Play"><img src="media/figs/elephant-night.webp" alt="Six TeCoBots docked into an elephant: a spine, four legs and a trunk." loading="lazy" width="1400" height="767"></a>
+    <div class="imagineText">
+      <p class="imagineTag">Imagine</p>
+      <h2 id="h-imagine">What it could become</h2>
+      <p>Six robots as an elephant: one spine, four legs and a trunk, joined by the claws.</p>
+      <a class="playBtn" href="play/#C6">Try it in Play</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="single" aria-labelledby="h-single">
+  <h2 id="h-single">One robot</h2>
+  <p class="lead">What a single TeCoBot can do: handle objects (manipulate), move six different ways, and roll across various terrain (sped up).</p>
+  <h3 class="subhead">Manipulation</h3>
+  <div class="clips square">
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/man-reach.jpg" data-src="media/clips/man-reach.mp4" aria-label="Shortening the body"></video></div>
+<figcaption><b>Shortening the body</b><span>Extends to grab grapes overhead, then collapses and bends its body to drop them in the jar.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/man-bend.jpg" data-src="media/clips/man-bend.mp4" aria-label="Bending"></video></div>
+<figcaption><b>Bending</b><span>Bends toward grapes on either side, then bends again to place them in the jar.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/man-load.jpg" data-src="media/clips/man-load.mp4" aria-label="Load bearing"></video></div>
+<figcaption><b>Load bearing</b><span>Hanging from one gripper, the robot holds and lifts a full 2.5 L water bottle with the other.</span></figcaption></figure>
+</div>
+
+  <h3 class="subhead">Six ways to move</h3>
+  <div class="clips nocap">
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/loc-axial.jpg" data-src="media/clips/loc-axial.mp4" aria-label="Axial extension–compression"></video></div>
+<figcaption><b>Axial extension–compression</b><span>Claws anchor in turn while the body shortens and lengthens.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/loc-inch.jpg" data-src="media/clips/loc-inch.mp4" aria-label="Inchworm"></video></div>
+<figcaption><b>Inchworm</b><span>The body arches and slides forward on directional-friction claws.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/loc-crawl.jpg" data-src="media/clips/loc-crawl.mp4" aria-label="Crawling with claws"></video></div>
+<figcaption><b>Crawling with claws</b><span>One claw opens and closes against the ground to drag the body along.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/loc-roll.jpg" data-src="media/clips/loc-roll.mp4" aria-label="Rolling"></video></div>
+<figcaption><b>Rolling</b><span>Cables pull in sequence, shifting the centre of mass so the robot tips over and rolls. The fastest gait.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/loc-turn.jpg" data-src="media/clips/loc-turn.mp4" aria-label="Turning"></video></div>
+<figcaption><b>Turning</b><span>One cable bends the body toward the turn between claw anchors.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/loc-pipe.jpg" data-src="media/clips/loc-pipe.mp4" aria-label="Pipe climbing"></video></div>
+<figcaption><b>Pipe climbing</b><span>Axial extension–compression inside a pipe carries it straight up.</span></figcaption></figure>
+</div>
+
+  <h3 class="subhead">Eight terrains tested</h3>
+  <p class="subLead">Rolling works best: it keeps going over loose, uneven ground like rocks and hay, and is fastest on smooth wood, at 30&nbsp;mm/s.</p>
+  <div class="clips four terrain nocap">
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ter-sidewalk.jpg" data-src="media/clips/ter-sidewalk.mp4" aria-label="Sidewalk"></video></div>
+<figcaption><b>Sidewalk</b><span></span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ter-grass.jpg" data-src="media/clips/ter-grass.mp4" aria-label="Grass"></video></div>
+<figcaption><b>Grass</b><span></span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ter-gravel.jpg" data-src="media/clips/ter-gravel.mp4" aria-label="Gravel"></video></div>
+<figcaption><b>Gravel</b><span></span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ter-hay.jpg" data-src="media/clips/ter-hay.mp4" aria-label="Hay"></video></div>
+<figcaption><b>Hay</b><span></span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ter-rocks.jpg" data-src="media/clips/ter-rocks.mp4" aria-label="Rocks"></video></div>
+<figcaption><b>Rocks</b><span></span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ter-soil.jpg" data-src="media/clips/ter-soil.mp4" aria-label="Soil"></video></div>
+<figcaption><b>Soil</b><span></span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ter-wood.jpg" data-src="media/clips/ter-wood.mp4" aria-label="Smooth wood"></video></div>
+<figcaption><b>Smooth wood</b><span></span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ter-carpet.jpg" data-src="media/clips/ter-carpet.mp4" aria-label="Low-pile carpet"></video></div>
+<figcaption><b>Low-pile carpet</b><span></span></figcaption></figure>
+</div>
+</section>
+
+<section class="sec" id="manipulation" aria-labelledby="h-manip">
+  <h2 id="h-manip">Cooperative manipulation</h2>
+  <p class="lead">Three robots on a frame can rearrange themselves into many layouts, each suited to a different job (sped up).</p>
+  <div class="clips">
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cm-3v.jpg" data-src="media/clips/cm-3v.mp4" aria-label="M1: lifting a ball"></video></div>
+<figcaption><b>M1: lifting a ball</b><span>Three hanging robots bend inward together to cooperatively lift a 200 mm ball.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cm-2v1h.jpg" data-src="media/clips/cm-2v1h.mp4" aria-label="M2: test tube"></video></div>
+<figcaption><b>M2: test tube</b><span>Pick up a test tube, remove the cork and pour liquid into a beaker.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cm-tissue.jpg" data-src="media/clips/cm-tissue.mp4" aria-label="M3: tissue"></video></div>
+<figcaption><b>M3: tissue</b><span>Two ground robots hold the roll while the vertical robot unrolls and tears.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cm-1v2h.jpg" data-src="media/clips/cm-1v2h.mp4" aria-label="M3: open container"></video></div>
+<figcaption><b>M3: open container</b><span>Ground robots hold the container steady while the vertical robot removes the lid and retrieves the object inside.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cm-3s.jpg" data-src="media/clips/cm-3s.mp4" aria-label="M4: extended reach"></video></div>
+<figcaption><b>M4: extended reach</b><span>Three in series reach a bottle beyond any one robot’s reach.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cm-5h.jpg" data-src="media/clips/cm-5h.mp4" aria-label="M5: orienting a block"></video></div>
+<figcaption><b>M5: orienting a block</b><span>Three robots lying on the ground work together, pushing and rolling a cube to turn it to a new face.</span></figcaption></figure>
+</div>
+</section>
+
+<section class="sec" id="locomotion" aria-labelledby="h-loco">
+  <h2 id="h-loco">Cooperative locomotion</h2>
+  <p class="lead">On the ground, robots link into chains, loops and branches to move in ways one robot cannot (sped up).</p>
+  <div class="clips">
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cl-o-.jpg" data-src="media/clips/cl-o-.mp4" aria-label="O-: carrying a large object"></video></div>
+<figcaption><b>O-: carrying a large object</b><span>The loop encloses the object while the tail inches it forward.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cl-h.jpg" data-src="media/clips/cl-h.mp4" aria-label="H: climbing a duct"></video></div>
+<figcaption><b>H: climbing a duct</b><span>Parallel robots anchor in turn while the cross-member pushes and pulls.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cl-o.jpg" data-src="media/clips/cl-o.mp4" aria-label="O: rolling around a pipe"></video></div>
+<figcaption><b>O: rolling around a pipe</b><span>Three robots closed into a loop roll along a large cylinder.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cl-y.jpg" data-src="media/clips/cl-y.mp4" aria-label="Y: object transport"></video></div>
+<figcaption><b>Y: object transport</b><span>Two branch robots hold a box while the rear robot drives.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cl-square.jpg" data-src="media/clips/cl-square.mp4" aria-label="Square: four robots"></video></div>
+<figcaption><b>Square: four robots</b><span>An enclosed square moves forward as one body.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/nat-roll.jpg" data-src="media/clips/nat-roll.mp4" aria-label="Chain: rolling over a log"></video></div>
+<figcaption><b>Chain: rolling over a log</b><span>Outdoors, a chain rolls over obstacles a single robot could not.</span></figcaption></figure>
+</div>
+</section>
+
+<section class="sec" id="tasks" aria-labelledby="h-tasks">
+  <h2 id="h-tasks">Real-world tasks</h2>
+  <p class="lead">The robots climb, hand over, and carry objects, changing configurations between steps (sped up).</p>
+  <div class="clips">
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ta-climb.jpg" data-src="media/clips/ta-climb.mp4" aria-label="Climbing onto the table"></video></div>
+<figcaption><b>Climbing onto the table</b><span>Two robots push the third up onto the tabletop.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ta-handover.jpg" data-src="media/clips/ta-handover.mp4" aria-label="Handover between levels"></video></div>
+<figcaption><b>Handover between levels</b><span>One robot passes scrap paper from the tabletop to another robot standing on the floor.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ta-dock.jpg" data-src="media/clips/ta-dock.mp4" aria-label="Forming a chain across levels"></video></div>
+<figcaption><b>Forming a chain across levels</b><span>A floor robot docks to the one on the table.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/ta-trash.jpg" data-src="media/clips/ta-trash.mp4" aria-label="Into the bin"></video></div>
+<figcaption><b>Into the bin</b><span>The chain carries the scrap paper over and drops it in.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/cm-handover.jpg" data-src="media/clips/cm-handover.mp4" aria-label="Cabinet organization"></video></div>
+<figcaption><b>Cabinet organization</b><span>A part is handed over and placed in the drawer.</span></figcaption></figure>
+<figure class="clip"><div class="frame"><video muted loop playsinline preload="none" poster="media/posters/nat-tasks.jpg" data-src="media/clips/nat-tasks.mp4" aria-label="Sample collection outdoors"></video></div>
+<figcaption><b>Sample collection outdoors</b><span>Two robots roll forward, then one stands up to pluck a flower and place it in a beaker while remaining connected.</span></figcaption></figure>
+</div>
+</section>
+
+<section class="sec" id="videos" aria-labelledby="h-videos">
+  <h2 id="h-videos">Videos</h2>
+  <p class="lead">The full videos, with the playback speed noted for each.</p>
+  <div class="library">
+    <figure class="player">
+      <div class="frame"><video controls playsinline preload="none" poster="media/posters/s-manipulation.jpg" src="media/video/s-manipulation.mp4"></video></div>
+      <figcaption><b>Cooperative manipulation</b><span class="muted">Multiple robots work together to grasp, move and handle objects, changing how they are arranged to suit each task.</span></figcaption>
+    </figure>
+    <ul class="playlist">
+<li><button type="button" data-video="media/video/s-manipulation.mp4" data-poster="media/posters/s-manipulation.jpg" data-desc="Multiple robots work together to grasp, move and handle objects, changing how they are arranged to suit each task." aria-current="true">
+  <img src="media/posters/s-manipulation.jpg" alt="" loading="lazy"><span><b>Cooperative manipulation</b><span>30× speed.</span></span></button></li>
+<li><button type="button" data-video="media/video/s-locomotion.mp4" data-poster="media/posters/s-locomotion.jpg" data-desc="Multiple robots dock together and move as one body, changing their shape to suit the terrain and the task.">
+  <img src="media/posters/s-locomotion.jpg" alt="" loading="lazy"><span><b>Cooperative locomotion</b><span>20× speed.</span></span></button></li>
+<li><button type="button" data-video="media/video/s-sample.mp4" data-poster="media/posters/s-sample.jpg" data-desc="Docked robots collect a sample in the field: they roll to a bush, pluck a flower into a beaker and bring it back.">
+  <img src="media/posters/s-sample.jpg" alt="" loading="lazy"><span><b>Outdoor sample collection</b><span>10× speed.</span></span></button></li>
+<li><button type="button" data-video="media/video/s-trash.mp4" data-poster="media/posters/s-trash.jpg" data-desc="Docked robots clean up outdoors: a chain rolls over a log across a stream and picks up trash with its claws.">
+  <img src="media/posters/s-trash.jpg" alt="" loading="lazy"><span><b>Outdoor trash pickup</b><span>20× speed.</span></span></button></li>
+<li><button type="button" data-video="media/video/s-axial-roll.mp4" data-poster="media/posters/s-axial-roll.jpg" data-desc="How a single robot moves on its own, shown with two of its gaits: axial extension–compression and rolling.">
+  <img src="media/posters/s-axial-roll.jpg" alt="" loading="lazy"><span><b>One robot, two tested gaits</b><span>16× and 8× speed.</span></span></button></li>
+<li><button type="button" data-video="media/video/s-autodock.mp4" data-poster="media/posters/s-autodock.jpg" data-desc="Robots connecting without a human: an onboard camera guides one robot until its claw closes on another.">
+  <img src="media/posters/s-autodock.jpg" alt="" loading="lazy"><span><b>Autonomous docking</b><span>10× speed.</span></span></button></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="next" aria-labelledby="h-next">
+  <h2 id="h-next">Go further</h2>
+  <div class="ctas">
+    <a class="cta ctaPlay" href="play/"><h3>Play with TeCoBots</h3><p>Drive a robot by its three cables and explore 25+ configurations, from one module to six docked robots. Find the lizard and the elephant.</p><span class="go">Open Play</span><img class="ctaArt" src="media/figs/elephant-night.webp" alt="" loading="lazy"></a>
+    <a class="cta alt" href="build/"><h3>Build your own</h3><p>Dimensions, parts, CAD files, assembly, the kinematic model and the gait sequences.</p><span class="go">Read the guides</span></a>
+  </div>
+</section>
+
+<section class="sec" id="cite" aria-labelledby="h-cite">
+  <h2 id="h-cite">Citation</h2>
+  <!-- RELEASE DAY: swap for the journal citation (volume, pages, DOI) -->
+  <div class="bibwrap"><pre id="bibtex">@article{saikot2026tecobot,
+  title   = {Tensegrity Continuum Robots Enable Task-Adaptive
+             Morphologies for Cooperative Behaviors},
+  author  = {Saikot, Mahmud Hasan and Spiegel, S. and Kariyawasam, S. A.
+             and Stefka, A. and Chrisler, J. and Zhao, Jianguo},
+  journal = {arXiv preprint arXiv:2608.27221},
+  year    = {2026}
+}</pre><button class="copy" type="button" data-target="bibtex">Copy</button></div>
+</section>
+
+</main>
+
+<footer class="foot"><div class="in">
+  <nav class="footLinks" aria-label="Footer">
+    <a href="play/">Play with TeCoBots</a>
+    <a href="paper/">Paper</a>
+    <a href="build/">Build</a>
+    <a href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
+    <a href="https://www.engr.colostate.edu/laboratories/adaptive-robotics-laboratory" target="_blank" rel="noopener">Adaptive Robotics Lab</a>
+  </nav>
+  <!-- RELEASE DAY: figures are the preprint (arXiv) versions; check the licence to publish before swapping in journal versions -->
+  <p class="footNote">© 2026 the authors · Code: <a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT</a></p>
+  <p class="footNote">Adaptive Robotics Lab, Department of Mechanical Engineering, Colorado State University, Fort Collins, CO, USA</p>
+  <p class="footDev">Developed by <a href="https://mahmud-hasans.github.io/" target="_blank" rel="noopener">Mahmud Hasan Saikot</a> with <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></p>
+</div></footer>
+
+<dialog class="lightbox" aria-label="Figure">
+  <button class="close" type="button">Close</button>
+  <div class="box"><img alt=""><p></p></div>
+</dialog>
+
+<script>
+  // the renderer's palette follows the theme from the first frame
+  document.getElementById('pal').value = document.documentElement.getAttribute('data-theme') === 'light' ? 'day' : 'studio';
+</script>
+<script src="assets/tecobot.js"></script>
+<script src="assets/site.js"></script>
+<script data-goatcounter="https://tecobot.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

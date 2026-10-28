@@ -1,0 +1,814 @@
+/* TeCoBot site — page chrome and content styles, layered on tecobot.css
+   (which owns the colour tokens and the renderer/Play UI). */
+
+:root{
+  --max: clamp(1120px, 74vw, 1640px);
+  --prose: 68ch;
+  --radius: 14px;
+  --black: #0A0B0B;
+  --on-black: #F3F6F4;
+  --on-black-2: rgba(243,246,244,.72);
+  --on-black-3: rgba(243,246,244,.5);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+img,video{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:20;background:var(--black);color:var(--on-black)}
+.topbar .in{max-width:var(--max);margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:22px}
+.brand{font-weight:800;font-variation-settings:"wdth" 118;font-size:18px;text-decoration:none;color:var(--on-black);margin-right:auto;letter-spacing:-.01em}
+.topbar nav{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.topbar nav::-webkit-scrollbar{display:none}
+.topbar nav a{color:var(--on-black-2);text-decoration:none;font-size:14px;font-weight:600;padding:7px 11px;border-radius:999px;white-space:nowrap}
+.topbar nav a:hover{color:var(--on-black);background:rgba(255,255,255,.08)}
+.topbar nav a[aria-current="page"]{color:var(--on-black);background:rgba(255,255,255,.12)}
+/* on the hero the bar lines up with the hero type, not the content column;
+   it stays a solid bar of its own, so nothing in the hero runs underneath it */
+body.splashing .topbar{border-bottom:1px solid rgba(255,255,255,.08)}
+body.splashing .topbar .in{max-width:none;padding:0 clamp(28px,6vw,86px)}
+@media (max-width:899px){ body.splashing .topbar .in{padding:0 12px} }
+body.playpage .topbar .in{max-width:clamp(1240px,90vw,2200px)}
+@media (max-width:560px){ .topbar .in{gap:8px;padding:0 12px} .topbar nav a{padding:7px 8px;font-size:13px} .brand{font-size:16px} }
+
+/* ---------- landing hero (the renderer's splash, filled in) ---------- */
+body.splashing .layout{min-height:0}
+.splashInner .authors{position:relative;margin:0 0 4px;color:var(--on-black-2);font-size:14px;line-height:1.55}
+.splashInner .authors a{color:var(--on-black);text-decoration:none;border-bottom:1px solid rgba(243,246,244,.25)}
+.splashInner .authors a:hover{border-bottom-color:rgba(243,246,244,.8)}
+.splashInner .affil{position:relative;margin:0 0 18px;color:var(--on-black-3);font-size:13px}
+.linkrow{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.linkrow a{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;
+  text-decoration:none;color:var(--on-black);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}
+.linkrow a:hover{background:rgba(255,255,255,.18)}
+.linkrow a.soon{color:var(--on-black-3);border-style:dashed;cursor:default}
+.linkrow a.soon:hover{background:rgba(255,255,255,.1)}
+.linkrow svg{width:16px;height:16px;flex:none}
+.heroCtas{position:relative;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+a.playBtn{display:inline-block;text-decoration:none;border-radius:999px;font-weight:600}
+.ghostBtn{display:inline-block;text-decoration:none;color:var(--on-black);font-weight:600;font-size:16px;padding:13px 22px;border-radius:999px;border:1.5px solid rgba(255,255,255,.35)}
+.ghostBtn:hover{border-color:rgba(255,255,255,.75)}
+@media (max-width:899px){
+  .splash{padding:0 16px 3vh}
+  .splashInner .affil,.splashInner .scrollCue{display:none}
+  .splashInner .authors{font-size:13px;margin-bottom:14px}
+  .paperLine{margin-bottom:12px}
+  .splashSub{margin-bottom:14px}
+  .linkrow{gap:6px;margin-bottom:16px}
+  .linkrow a{padding:6px 11px;font-size:13px}
+  .splashInner{max-width:none}
+  .linkrow{justify-content:center}
+  .heroCtas{justify-content:center}
+}
+
+/* ---------- content ---------- */
+main.content{background:var(--paper)}
+.sec{max-width:var(--max);margin:0 auto;padding:72px 20px 8px}
+.sec + .sec{padding-top:56px}
+.sec h2{margin:0 0 12px;font-weight:800;font-variation-settings:"wdth" 112;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-.015em}
+.sec h3{margin:34px 0 12px;font-weight:700;font-size:20px;line-height:1.25}
+.lead{max-width:var(--prose);font-size:17.5px;line-height:1.62;margin:0 0 14px}
+.prose{max-width:var(--prose)}
+.prose p{margin:0 0 14px;font-size:16.5px;line-height:1.65}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+
+/* facts band */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink);margin-top:30px}
+.fact{padding:16px 18px 6px 0}
+.fact b{display:block;font-size:clamp(24px,3vw,32px);font-variation-settings:"wdth" 118;font-weight:800;line-height:1.08}
+.fact span{display:block;font-size:14px;color:var(--muted);margin-top:4px;line-height:1.4}
+@media (max-width:760px){ .facts{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+/* teaser reels: three phone-shaped videos */
+/* sized to the window: as wide as three reels can be while each stays about
+   two thirds of the window tall, so a big screen gets big reels and
+   all three are still seen whole without scrolling */
+.reels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.2vw,26px);
+  max-width:min(100%, calc(3 * 64vh * 9 / 16 + 2 * clamp(12px,1.2vw,26px)))}
+.reel{position:relative;margin:0;border-radius:var(--radius);overflow:hidden;background:var(--black);aspect-ratio:9/16}
+.reel video{width:100%;height:100%;object-fit:cover}
+.sound{position:absolute;right:10px;bottom:10px;font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;
+  border:0;background:rgba(10,11,11,.7);color:#fff;cursor:pointer}
+@media (max-width:640px){
+  .reels{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .reel{scroll-snap-align:center}
+}
+
+/* clip grids */
+.clips{display:grid;gap:18px 16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.clips.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.clips.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.clip{margin:0}
+.clip .frame{position:relative;border-radius:12px;overflow:hidden;background:var(--black);aspect-ratio:16/9}
+.clip.wide .frame{aspect-ratio:auto}
+.clip video{width:100%;height:100%;object-fit:cover}
+.clip figcaption{margin-top:8px;font-size:14.5px;line-height:1.45}
+.clip figcaption b{display:block;font-size:15.5px;margin-bottom:1px}
+.clip figcaption span{color:var(--muted)}
+@media (max-width:900px){ .clips,.clips.four{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:560px){ .clips,.clips.two,.clips.four{grid-template-columns:minmax(0,1fr)} .clips.four.terrain{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+/* a figure from the paper, with the text beside it */
+.figrow{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:32px;align-items:start;margin:8px 0 28px}
+.figrow.flip{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.figrow.flip > :first-child{order:2}
+.paperfig{margin:0;background:#fff;border-radius:12px;padding:12px;border:1px solid var(--rule);cursor:zoom-in}
+.paperfig img{width:100%;height:auto}
+.paperfig figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.45}
+@media (max-width:860px){ .figrow,.figrow.flip{grid-template-columns:minmax(0,1fr)} .figrow.flip > :first-child{order:0} }
+
+/* docking modes */
+.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:6px}
+.mode{border:1.5px solid var(--rule);border-radius:var(--radius);padding:18px 18px 16px;background:var(--panel);display:flex;flex-direction:column}
+.mode a{margin-top:auto;padding-top:14px}
+.mode h3{margin:0 0 6px;font-size:18px}
+.mode p{margin:0 0 12px;font-size:15px;line-height:1.55}
+.mode .num{font-variation-settings:"wdth" 118;font-weight:800;font-size:26px;display:block;line-height:1.1}
+.mode .num + span{font-size:13.5px;color:var(--muted)}
+.mode a{font-size:14px;font-weight:600}
+@media (max-width:860px){ .modes{grid-template-columns:minmax(0,1fr)} }
+
+/* video library: one player, a list to pick from */
+.library{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:start}
+.player{margin:0}
+.player .frame{border-radius:var(--radius);overflow:hidden;background:var(--black)}
+.player video{width:100%;max-height:72vh;margin:0 auto;background:var(--black)}
+.player figcaption{margin-top:10px;font-size:15px}
+.player figcaption b{display:block;font-size:17px}
+.playlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;max-height:min(72vh,640px);overflow-y:auto}
+.playlist button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;align-items:center;
+  padding:6px;border-radius:12px;cursor:pointer}
+.playlist button:hover{background:var(--panel)}
+.playlist button[aria-current="true"]{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.playlist button:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.playlist img{width:96px;height:54px;object-fit:cover;border-radius:8px;background:var(--black)}
+.playlist b{display:block;font-size:14.5px;line-height:1.3}
+.playlist span{display:block;font-size:12.5px;color:var(--muted)}
+@media (max-width:860px){ .library{grid-template-columns:minmax(0,1fr)} .playlist{max-height:none} }
+
+/* figure gallery */
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.figs button{all:unset;box-sizing:border-box;cursor:zoom-in;display:block;border-radius:12px;background:#fff;border:1px solid var(--rule);padding:10px}
+.figs button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.figs img{width:100%;aspect-ratio:4/3;object-fit:contain}
+.figs b{display:block;margin-top:8px;font-size:14.5px;color:var(--ink)}
+.figs span{display:block;font-size:13px;color:var(--muted)}
+@media (max-width:760px){ .figs{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+dialog.lightbox{border:0;padding:0;background:transparent;max-width:min(1400px,96vw);max-height:94vh;width:100%}
+dialog.lightbox::backdrop{background:rgba(6,7,7,.86)}
+.lightbox .box{background:#fff;border-radius:12px;padding:14px;max-height:94vh;overflow:auto}
+.lightbox img{width:100%;height:auto}
+.lightbox p{margin:10px 2px 2px;font-size:14px;color:#3d4447;line-height:1.5}
+.lightbox .close{position:fixed;top:14px;right:16px;font:inherit;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;border:0;background:#fff;color:#14181A;cursor:pointer}
+
+/* call-to-action panels */
+.ctas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.cta{display:block;text-decoration:none;border-radius:var(--radius);padding:26px 24px;background:var(--black);color:var(--on-black);position:relative;overflow:hidden}
+.cta h3{margin:0 0 6px;font-size:24px;font-variation-settings:"wdth" 112;font-weight:800}
+.cta p{margin:0 0 16px;color:var(--on-black-2);font-size:15.5px;line-height:1.55;max-width:46ch}
+.cta .go{display:inline-block;font-weight:600;font-size:15px;padding:10px 18px;border-radius:999px;background:#fff;color:#14181A}
+.cta.alt{background:var(--panel);color:var(--ink);border:1.5px solid var(--rule)}
+.cta.alt p{color:var(--muted)}
+.cta.alt .go{background:var(--ink);color:var(--paper)}
+@media (max-width:760px){ .ctas{grid-template-columns:minmax(0,1fr)} }
+
+/* citation */
+.bibwrap{position:relative;max-width:820px}
+.bibwrap pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.55;background:var(--panel);
+  border-radius:12px;padding:18px 20px;overflow-x:auto;margin:0;border:1px solid var(--rule)}
+.copy{position:absolute;top:10px;right:10px;font:inherit;font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;
+  border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer}
+
+/* placeholders: anything still to come is drawn dashed so it can't be mistaken for the real thing */
+.ph{border:1.5px dashed var(--rule);border-radius:12px;padding:14px 16px;color:var(--muted);font-size:14.5px;background:transparent}
+.ph b{color:var(--ink)}
+
+/* footer */
+.foot{margin-top:72px;background:var(--black);color:var(--on-black-2)}
+.foot .in{max-width:var(--max);margin:0 auto;padding:36px 20px 44px;font-size:14px;line-height:1.6;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px}
+.foot a{color:var(--on-black)}
+.foot p{margin:0 0 10px}
+@media (max-width:760px){ .foot .in{grid-template-columns:minmax(0,1fr)} }
+
+/* ---------- guides ---------- */
+.guide{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;max-width:var(--max);margin:0 auto;padding:0 20px}
+.toc{position:sticky;top:72px;align-self:start;padding-top:56px;font-size:14px}
+.toc ol{list-style:none;margin:0;padding:0;border-left:2px solid var(--rule)}
+.toc a{display:block;padding:5px 0 5px 14px;margin-left:-2px;border-left:2px solid transparent;text-decoration:none;color:var(--muted)}
+.toc a:hover{color:var(--ink)}
+.toc a.on{color:var(--ink);border-left-color:var(--accent);font-weight:600}
+.guide .sec{padding-left:0;padding-right:0}
+@media (max-width:900px){ .guide{grid-template-columns:minmax(0,1fr);gap:0} .toc{display:none} }
+
+table.tbl{border-collapse:collapse;width:100%;font-size:14.5px;margin:6px 0 10px}
+.tbl th,.tbl td{text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl th{font-weight:700;border-bottom:2px solid var(--ink)}
+.tbl td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td.tbd{color:var(--muted);font-style:italic}
+.tblwrap{overflow-x:auto;max-width:100%}
+.tbl caption{caption-side:bottom;text-align:left;font-size:13px;color:var(--muted);padding-top:8px}
+
+.files{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.file{border:1.5px solid var(--rule);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.file b{font-size:15.5px}
+.file span{font-size:13.5px;color:var(--muted)}
+.file a,.file em{margin-top:8px;font-size:14px;font-weight:600}
+.file.soon{border-style:dashed}
+.file.soon em{font-style:normal;color:var(--muted)}
+@media (max-width:860px){ .files{grid-template-columns:minmax(0,1fr)} }
+
+ol.steps{list-style:none;counter-reset:s;margin:10px 0 0;padding:0;max-width:var(--prose)}
+ol.steps > li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+ol.steps > li::before{content:counter(s);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;
+  background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:700;font-size:15px}
+ol.steps > li::after{content:"";position:absolute;left:16px;top:38px;bottom:4px;width:2px;background:var(--rule)}
+ol.steps > li:last-child::after{display:none}
+ol.steps h3{margin:2px 0 6px;font-size:17.5px}
+ol.steps p{margin:0 0 8px;font-size:15.5px;line-height:1.6}
+
+.eq{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:18px;background:var(--panel);border-radius:10px;
+  padding:12px 16px;margin:8px 0 14px;overflow-x:auto;white-space:nowrap;max-width:var(--prose)}
+.gimg{margin:0;background:#fff;border-radius:12px;border:1px solid var(--rule);padding:10px}
+.gimg img{width:100%;height:auto}
+.gimg figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.split.narrow{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+@media (max-width:760px){ .split,.split.narrow{grid-template-columns:minmax(0,1fr)} }
+
+/* ---------- Play page: put the bar above the tool ---------- */
+body.playpage .wrap{padding-top:16px}
+
+/* ---------- day / night ----------
+   Night is the studio look: black hero, dark page. Day turns the whole page
+   light, hero included, and the renderer switches to its paper palette. The
+   colour tokens themselves come from tecobot.css's :root[data-theme]. */
+.themeSwitch{display:inline-flex;flex:none;gap:2px;padding:3px;border-radius:999px;background:rgba(255,255,255,.08);margin-left:6px}
+.themeSwitch button{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:600;padding:5px 11px;
+  border:0;border-radius:999px;background:transparent;color:var(--on-black-2);cursor:pointer}
+.themeSwitch button:hover{color:var(--on-black)}
+.themeSwitch button[aria-pressed="true"]{background:rgba(255,255,255,.16);color:var(--on-black)}
+.themeSwitch svg{width:15px;height:15px;flex:none}
+@media (max-width:560px){ .themeSwitch button span{display:none} .themeSwitch button{padding:6px 8px} }
+
+html[data-theme="light"] .topbar{background:var(--stage);color:var(--ink);border-bottom:1px solid var(--rule)}
+html[data-theme="light"] .brand{color:var(--ink)}
+html[data-theme="light"] .topbar nav a{color:var(--muted)}
+html[data-theme="light"] .topbar nav a:hover{color:var(--ink);background:rgba(0,0,0,.06)}
+html[data-theme="light"] .topbar nav a[aria-current="page"]{color:var(--ink);background:rgba(0,0,0,.08)}
+html[data-theme="light"] .themeSwitch{background:rgba(0,0,0,.06)}
+html[data-theme="light"] .themeSwitch button{color:var(--muted)}
+html[data-theme="light"] .themeSwitch button:hover{color:var(--ink)}
+html[data-theme="light"] .themeSwitch button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+/* the hero type, in day. No scrim: the background is one flat colour and the
+   robot is fitted clear of the type, so a gradient would only add banding. */
+html[data-theme="light"] .splash::before{display:none}
+html[data-theme="light"] .splashTitle{color:var(--ink)}
+html[data-theme="light"] .splashSub{color:var(--muted)}
+html[data-theme="light"] .paperTitle{color:var(--ink);border-bottom-color:rgba(20,24,26,.3)}
+html[data-theme="light"] .paperTitle:hover{border-bottom-color:var(--ink)}
+html[data-theme="light"] .paperVenue,
+html[data-theme="light"] .splashInner .affil,
+html[data-theme="light"] .scrollCue{color:var(--muted)}
+html[data-theme="light"] .splashInner .authors{color:var(--muted)}
+html[data-theme="light"] .splashInner .authors a{color:var(--ink);border-bottom-color:rgba(20,24,26,.3)}
+html[data-theme="light"] .linkrow a{color:var(--ink);background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.14)}
+html[data-theme="light"] .linkrow a:hover{background:rgba(0,0,0,.08)}
+html[data-theme="light"] .linkrow a.soon{color:var(--muted)}
+html[data-theme="light"] .linkrow a.soon:hover{background:rgba(0,0,0,.04)}
+html[data-theme="light"] a.playBtn{background:var(--ink);color:var(--paper);border-color:var(--ink);box-shadow:none}
+html[data-theme="light"] .ghostBtn{color:var(--ink);border-color:rgba(20,24,26,.3)}
+html[data-theme="light"] .ghostBtn:hover{border-color:var(--ink)}
+/* night page: the call-to-action panel needs an edge against the dark page */
+html[data-theme="dark"] .cta{border:1.5px solid var(--rule)}
+/* on a phone the switch needs the room; Paper and Code are in the hero's link row anyway */
+@media (max-width:560px){ .topbar nav a.wideOnly{display:none} }
+
+/* Day hero is mid grey (#B9BCBF, drawn by the renderer), so its smaller grey
+   text is darkened to keep 5:1 contrast on it. */
+html[data-theme="light"] .splashSub,
+html[data-theme="light"] .paperVenue,
+html[data-theme="light"] .splashInner .authors,
+html[data-theme="light"] .splashInner .affil,
+html[data-theme="light"] .scrollCue,
+html[data-theme="light"] .linkrow a.soon{color:#3E4549}
+html[data-theme="light"] .linkrow a{background:rgba(255,255,255,.28);border-color:rgba(20,24,26,.22)}
+html[data-theme="light"] .linkrow a:hover{background:rgba(255,255,255,.45)}
+html[data-theme="light"] .linkrow a.soon:hover{background:rgba(255,255,255,.28)}
+html[data-theme="light"] .ghostBtn{border-color:rgba(20,24,26,.4)}
+
+/* ---------- hero type, a size down ---------- */
+.splashTitle{font-size:clamp(30px,5vw,52px)}
+.splashSub{font-size:clamp(13px,1.4vw,15.5px);margin:6px 0 18px}
+.paperLine{font-size:12.5px}
+.splashInner .authors{font-size:13px}
+.splashInner .affil{font-size:12px}
+.linkrow a{font-size:13px;padding:7px 12px}
+.heroCtas a.playBtn{font-size:15.5px;padding:12px 24px}
+.heroCtas .ghostBtn{font-size:15px;padding:11px 20px}
+
+/* On a wide screen the hero fills the window, and its type scales with the
+   window too: everything in the title block is sized in em off one base that
+   follows the screen's width and height (15.8 px on a 1440 x 900 window, the
+   size it was designed at), so a big monitor gets big type and a small
+   laptop smaller type, in the same proportions. */
+@media (min-width:900px){
+  /* the base follows width and height together, and the block's width is a
+     share of the window, so lines rewrap on a wider screen instead of
+     keeping the same breaks at any size */
+  .splashInner{font-size:clamp(12.5px,calc(.55vw + .88vh),26px);max-width:clamp(26em,36vw,46em)}
+  .splashInner .splashTitle{font-size:3.28em}
+  .splashInner .splashSub{font-size:.98em;margin:.38em 0 1.14em}
+  .splashInner .paperLine{font-size:.79em;margin-bottom:1.75em}
+  .splashInner .authors{font-size:.82em}
+  .splashInner .affil{font-size:.76em;margin-bottom:1.5em}
+  .splashInner .linkrow{gap:.5em;margin-bottom:1.4em}
+  .splashInner .linkrow a{font-size:.82em;padding:.54em .92em;gap:.54em}
+  .splashInner .linkrow svg{width:1.23em;height:1.23em}
+  .splashInner .heroCtas{gap:.76em}
+  .splashInner .heroCtas a.playBtn{font-size:.98em;padding:.77em 1.55em}
+  .splashInner .heroCtas .ghostBtn{font-size:.95em;padding:.73em 1.33em}
+  .splashInner .scrollCue{font-size:.76em;margin-top:1.5em}
+}
+
+/* ---------- Play: no spec panel, a shorter zoom slider ---------- */
+body.playpage #side{display:none !important}
+body.playpage .layout{grid-template-columns:minmax(0,1fr) !important}
+body.playpage #zoom{width:min(120px,30vw)}
+
+/* ---------- landing page: everything below the hero is centred ---------- */
+main.content > .sec{text-align:center}
+main.content > .sec h2,
+main.content > .sec h3,
+main.content > .sec .lead,
+main.content > .sec .prose{margin-left:auto;margin-right:auto}
+/* long reading keeps a straight left edge inside a centred column */
+main.content > #abstract .lead{text-align:justify;hyphens:auto}
+main.content > .sec .figrow .prose{text-align:left}
+main.content > .sec .mode,
+main.content > .sec .playlist,
+main.content > .sec .bibwrap pre{text-align:left}
+main.content > .sec .reels,
+main.content > .sec .bibwrap{margin-left:auto;margin-right:auto}
+main.content > .sec .facts{text-align:center}
+main.content > .sec .fact{padding:16px 12px 6px}
+main.content > .sec .clips.two{max-width:720px;margin-left:auto;margin-right:auto;grid-template-columns:minmax(0,1fr)}
+main.content > .sec .ctas{text-align:left}
+/* card titles stay at the start of their card (cards are flex columns, where auto margins would centre them) */
+main.content > .sec .mode h3{margin:0 0 6px}
+/* Play: the configuration's description runs the full width, justified */
+body.playpage .desc{max-width:none;text-align:center;hyphens:manual}
+body.playpage #rig-note{text-align:center}
+
+/* Play takes most of the window's width on a big screen, centred, instead of
+   stopping at a fixed 1240 px column */
+body.playpage .wrap{max-width:clamp(1240px,90vw,2200px)}
+/* everything under the stage is centred */
+body.playpage #below .controls{justify-content:center}
+body.playpage details.about > summary{text-align:center}
+
+/* Landing page: the top bar scales with the window like the hero type does.
+   Everything in it is sized in em off one base (about 14 px on a 1440 x 900
+   window), so a big monitor gets a bigger bar and a small laptop a smaller one. */
+@media (min-width:900px){
+  body.splashing .topbar .in{font-size:clamp(13px,calc(.5vw + .78vh),21px);height:3.7em;gap:1.5em}
+  body.splashing .brand{font-size:1.29em}
+  body.splashing .topbar nav{gap:.3em}
+  body.splashing .topbar nav a{font-size:1em;padding:.5em .79em}
+  body.splashing .themeSwitch{padding:.21em;margin-left:.43em}
+  body.splashing .themeSwitch button{font-size:.93em;padding:.38em .85em;gap:.46em}
+  body.splashing .themeSwitch svg{width:1.15em;height:1.15em}
+}
+
+/* Six ways to move: these clips are cut just above the burned-in gait name
+   and speed, so they are shown at their own shape (800 x 392) rather than
+   cropped to 16:9, which would cut into the sides. */
+.clips.nocap .frame{aspect-ratio:800/392}
+
+/* ---------- one content width for the landing page ----------
+   The reels set it (three phone-shaped clips, about two thirds of the window
+   tall), and the abstract and the scalability section follow it, so the
+   blocks line up instead of the text sitting in a narrow column. */
+:root{--wide:min(100%, calc(3 * 64vh * 9 / 16 + 2 * clamp(12px,1.2vw,26px)))}
+.reels{max-width:var(--wide)}
+main.content > #abstract .lead{max-width:var(--wide);font-size:clamp(17px,calc(.5vw + 10px),21px);line-height:1.65}
+
+/* ---------- Scalable ---------- */
+#idea-scalable .scaleRow,
+#idea-scalable .takeaway,
+#idea-scalable .lead{max-width:var(--wide);margin-left:auto;margin-right:auto}
+#idea-scalable .scaleRow{margin-top:28px}
+#idea-scalable .scaleRow h3{margin:0 0 12px}
+.scaleFigs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.2vw,26px)}
+.scaleFigs .paperfig{padding:clamp(8px,1vw,16px)}
+#idea-scalable .scaleRow .prose{max-width:none;text-align:justify;hyphens:auto;margin-top:14px;font-size:clamp(16px,calc(.4vw + 10px),19px);line-height:1.6}
+#idea-scalable .takeaway{max-width:var(--wide);margin-top:26px;padding:16px 20px;border-left:3px solid var(--accent);
+  background:var(--panel);border-radius:0 12px 12px 0;text-align:left;font-size:clamp(16px,calc(.4vw + 10px),19px);line-height:1.6}
+@media (max-width:700px){ .scaleFigs{grid-template-columns:minmax(0,1fr)} }
+
+/* ---------- footer: links, contacts, one small line ---------- */
+.foot .in{display:block}
+.footLinks{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0 0 14px;font-weight:600;font-size:15px}
+.footLinks a{text-decoration:none}
+.footLinks a:hover{text-decoration:underline}
+.footContact{display:flex;flex-wrap:wrap;gap:4px 28px}
+.footContact p{margin:0 0 6px}
+.footNote{margin:14px 0 0 !important;font-size:12.5px;color:var(--on-black-3);max-width:110ch}
+
+/* ---------- Paper page ---------- */
+body.paperpage main.content > .sec{max-width:min(var(--max), 1100px)}
+.paperHead{padding-top:56px}
+.paperHead h1{margin:0 auto 14px;max-width:26ch;font-weight:800;font-variation-settings:"wdth" 112;
+  font-size:clamp(28px,3.4vw,46px);line-height:1.1;letter-spacing:-.015em}
+.pAuthors{margin:0 0 4px;font-size:clamp(16px,1.2vw,19px)}
+.pAffil{margin:0 0 4px;color:var(--muted);font-size:15px}
+.pVenue{margin:0 0 18px;color:var(--muted);font-size:15px;font-style:italic}
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.pills a{padding:8px 16px;border-radius:999px;border:1px solid var(--rule);text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
+.pills a:hover{background:var(--panel)}
+.pHint{margin:18px 0 0;color:var(--muted);font-size:13.5px}
+.pfig h2{display:flex;flex-direction:column;align-items:center;gap:4px}
+.figNo{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.paperfig.big{max-width:min(100%, 980px);margin:6px auto 0}
+.pfig .explain{max-width:76ch;margin:20px auto 0;text-align:left;font-size:16.5px;line-height:1.65}
+.pfig .explain p{margin:0 0 12px}
+body.paperpage #cite .bibwrap{margin:0 auto;max-width:820px}
+body.paperpage #cite pre{text-align:left}
+
+/* ---------- What's new: three cards that open a panel ---------- */
+.ideas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.2vw,22px);
+  max-width:var(--wide);margin:22px auto 0;text-align:left}
+.idea{grid-row:1;display:flex;flex-direction:column;gap:6px;text-align:left;font:inherit;color:var(--ink);cursor:pointer;
+  background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:20px 22px 18px;transition:border-color .15s,transform .15s}
+.idea:hover{border-color:var(--muted)}
+.idea[aria-expanded="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.ideaNo{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--accent)}
+.idea b{font-size:clamp(20px,1.6vw,26px);font-weight:800;font-variation-settings:"wdth" 112;line-height:1.15}
+.ideaSum{color:var(--muted);font-size:15.5px;line-height:1.5}
+.ideaMore{margin-top:auto;padding-top:10px;font-weight:600;font-size:14px}
+.ideaMore::after{content:" +";}
+.idea[aria-expanded="true"] .ideaMore::after{content:" −";}
+.ideaPanel{grid-row:2;grid-column:1/-1;padding:24px clamp(16px,2vw,32px) 28px;border:1px solid var(--rule);border-radius:16px;background:var(--paper)}
+.ideaPanel[hidden]{display:none}
+.panelRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:start}
+.ideaPanel .prose{max-width:none;font-size:clamp(16px,calc(.4vw + 10px),18.5px);line-height:1.62}
+.ideaPanel .prose p{margin:0 0 12px}
+.panelLinks{display:flex;gap:18px;flex-wrap:wrap;font-weight:600}
+.panelSub{margin:18px 0 12px;font-size:clamp(18px,1.4vw,22px);font-weight:800;text-align:center}
+.ideaPanel .panelSub:first-child{margin-top:0}
+.panelLead{max-width:none !important;margin:0 0 18px;text-align:center}
+.ideaPanel .scaleRow .prose{text-align:justify}
+.ideaPanel .takeaway{margin-top:22px}
+.ideaPanel .modes{text-align:left}
+.ideaPanel .mode h4{margin:0 0 6px;font-size:19px}
+.ideaPanel .clips.two{max-width:720px;margin:0 auto;grid-template-columns:minmax(0,1fr);text-align:center}
+.ideaPanel > .prose.muted{margin:0 auto 14px;text-align:center}
+@media (max-width:860px){
+  .ideas{grid-template-columns:minmax(0,1fr)}
+  .idea,.ideaPanel{grid-row:auto}
+  .panelRow{grid-template-columns:minmax(0,1fr)}
+}
+
+/* ---------- section one-liners and sub-headings ---------- */
+main.content > .sec h3.subhead{margin:46px auto 6px;font-size:clamp(22px,2vw,30px);font-weight:800;
+  font-variation-settings:"wdth" 112;letter-spacing:-.01em;line-height:1.15}
+main.content > .sec h3.subhead + .clips,
+main.content > .sec h3.subhead + .subLead{margin-top:14px}
+.subLead{margin:6px auto 16px;max-width:70ch;color:var(--muted);font-size:clamp(15.5px,1.1vw,17.5px)}
+.clips.square .frame{aspect-ratio:1/1}
+
+/* ---------- hero: the smaller lines a size up against the title ---------- */
+@media (min-width:900px){
+  .splashInner .splashSub{font-size:1.18em}
+  .splashInner .paperLine{font-size:.98em}
+  .splashInner .authors{font-size:1em}
+  .splashInner .affil{font-size:.92em}
+  .splashInner .linkrow a{font-size:.95em}
+  .splashInner .heroCtas a.playBtn{font-size:1.08em}
+  .splashInner .heroCtas .ghostBtn{font-size:1.05em}
+  .splashInner .scrollCue{font-size:.82em}
+}
+
+/* ---------- section one-liners run the full content width, in the muted
+   explainer colour (the same as "Rolling works best") ---------- */
+main.content > .sec > .lead,
+main.content > .sec > .subLead{max-width:var(--wide);color:var(--muted);
+  font-size:clamp(16px,calc(.45vw + 10px),20px);line-height:1.55}
+main.content > #abstract > .lead{color:var(--ink)}
+
+/* ---------- What's new: smaller cards ---------- */
+.ideas{max-width:min(var(--wide), 1080px)}
+.idea{padding:16px 18px 14px;gap:4px;border-radius:14px}
+.ideaNo{font-size:11px}
+.idea b{font-size:clamp(17px,1.2vw,21px)}
+.ideaSum{font-size:14.5px;line-height:1.45}
+.ideaMore{font-size:13.5px;padding-top:8px}
+/* one-liners span the section, like the clip grids under them; the two
+   sections built around the reels keep the reels' width */
+main.content > .sec > .lead,
+main.content > .sec > .subLead{max-width:none}
+main.content > #overview > .lead,
+main.content > #abstract > .lead{max-width:var(--wide)}
+
+/* ---------- Paper page: figure, heading and explainer in proportion ----------
+   The figures are nearly square, so each is capped to fit the window's height
+   as well as a comfortable width, and the explainer runs the same width as
+   its figure, a size up, so the text carries as much weight as the picture. */
+body.paperpage .pfig h2{font-size:clamp(24px,2.1vw,32px)}
+body.paperpage .figNo{font-size:12px}
+body.paperpage .paperHead h1{font-size:clamp(26px,2.6vw,38px)}
+body.paperpage .paperfig.big{max-width:min(100%, 800px, calc(100vh - 150px))}
+body.paperpage .pfig .explain{max-width:min(100%, 800px);font-size:clamp(16.5px,calc(.35vw + 11px),18.5px);
+  text-align:justify;hyphens:auto}
+body.paperpage .pfig .explain{max-width:min(100%, 800px, calc(100vh - 150px))}
+
+/* hero block a little wider, so the tagline, the paper title and the author
+   list each fit on one line where the window allows; the robot takes the
+   space that is left (heroFit measures the block) */
+@media (min-width:900px){
+  .splashInner{max-width:clamp(26em,52vw,56em)}
+  .splashInner .splashSub,.splashInner .paperLine,.splashInner .authors{text-wrap:balance}
+}
+
+/* Paper page: one column at 70% of the window; figures and explainers share it */
+body.paperpage main.content > .sec{max-width:70vw}
+body.paperpage .paperfig.big,
+body.paperpage .pfig .explain{max-width:100%;width:100%}
+@media (max-width:900px){ body.paperpage main.content > .sec{max-width:none} }
+/* two square clips side by side, centred, at a size where squares stay sensible */
+main.content > .sec .clips.pair{grid-template-columns:repeat(2,minmax(0,1fr));max-width:min(100%, 66vh * 2 + 24px, 980px);margin-left:auto;margin-right:auto}
+@media (max-width:560px){ main.content > .sec .clips.pair{grid-template-columns:minmax(0,1fr)} }
+
+/* footer: centred */
+.foot .in{text-align:center}
+.footLinks{justify-content:center}
+.footContact{display:block;margin:0 0 6px}
+.footNote{margin-left:auto !important;margin-right:auto !important}
+body.paperpage #ack .explain{text-align:center;color:var(--muted)}
+.cadNote{margin-top:16px;max-width:var(--prose);font-size:15px;line-height:1.6}
+.cadNote p{margin:0 0 10px}
+.cadNote .license img{vertical-align:middle;margin-right:8px;border:0}
+.foot .footNote + .footNote{margin-top:6px !important}
+.ccBadge{display:inline-block;margin-right:8px;padding:3px 9px;border:1.5px solid currentColor;border-radius:6px;font-weight:700;font-size:12.5px;letter-spacing:.03em;vertical-align:middle}
+.cadNote .license a:first-child{text-decoration:none}
+.footDev{margin:14px 0 0 !important;font-size:11.5px;color:var(--on-black-3)}
+.footDev a{color:inherit}
+html[data-theme="light"] .footDev{color:var(--muted)}
+/* playlist: bigger thumbnails */
+.playlist{gap:8px}
+.playlist button{grid-template-columns:clamp(150px,11vw,200px) minmax(0,1fr);gap:14px;padding:8px}
+.playlist img{width:100%;height:auto;aspect-ratio:16/9}
+.playlist b{font-size:15.5px}
+.playlist span{font-size:13px}
+.library{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
+@media (max-width:860px){ .playlist button{grid-template-columns:140px minmax(0,1fr)} }
+.playlist{max-height:none;overflow:visible}
+body.playpage details.about{text-align:center}
+body.playpage details.about .note,
+body.playpage details.about p{margin-left:auto;margin-right:auto}
+
+/* ---------- the elephant: a capstone to What's new ---------- */
+main.content > #imagine{padding-top:28px}
+.imagine{max-width:min(var(--wide), 1080px);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+  align-items:center;gap:clamp(12px,2vw,28px);background:#0A0B0B;border-radius:18px;overflow:hidden;text-align:left;color:#F3F6F4}
+.imagineFig{display:block}
+.imagineFig img{display:block;width:100%;height:auto}
+.imagineText{padding:22px clamp(18px,2.4vw,32px) 22px 0}
+.imagineTag{margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#E04A42}
+main.content > #imagine .imagineText h2{margin:6px 0 10px;font-size:clamp(22px,2.1vw,30px);text-align:left}
+.imagineText p:not(.imagineTag){margin:0 0 18px;color:rgba(243,246,244,.72);font-size:clamp(15px,1.05vw,17px);line-height:1.55}
+.imagineText a.playBtn{font-size:15px;padding:11px 22px;box-shadow:none}
+html[data-theme="light"] .imagine{box-shadow:0 1px 0 rgba(0,0,0,.04)}
+@media (max-width:760px){
+  .imagine{grid-template-columns:minmax(0,1fr)}
+  .imagineText{padding:0 20px 22px;text-align:center}
+  main.content > #imagine .imagineText h2{text-align:center}
+}
+.playlist button > span{min-width:0;overflow-wrap:anywhere}
+@media (max-width:640px){ main.content > .sec .reels{max-width:100%;overscroll-behavior-x:contain} }
+@media (max-width:860px){ .library{grid-template-columns:minmax(0,1fr)} }
+/* Go further: the elephant tucked into the Play card */
+.cta.ctaPlay{padding-right:44%;min-height:220px}
+.cta.ctaPlay .ctaArt{position:absolute;right:-4%;bottom:-6%;width:56%;height:auto;pointer-events:none}
+@media (max-width:760px){
+  .cta.ctaPlay{padding-right:24px;padding-bottom:0}
+  .cta.ctaPlay .ctaArt{position:static;display:block;width:100%;margin:10px 0 -6px}
+}
+.cta.ctaPlay{padding-right:50%}
+.cta.ctaPlay > :not(.ctaArt){position:relative;z-index:1}
+.cta.ctaPlay .ctaArt{width:52%;right:-2%;bottom:-4%}
+@media (max-width:760px){ .cta.ctaPlay{padding-right:24px} .cta.ctaPlay .ctaArt{width:100%} }
+/* the elephant band, a little shorter */
+.imagine{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.imagineFig{padding:clamp(10px,1.4vw,20px) 0 clamp(10px,1.4vw,20px) clamp(10px,1.4vw,20px)}
+.imagineText{padding:16px clamp(18px,2.4vw,32px) 16px 0}
+.imagineText p:not(.imagineTag){margin-bottom:14px}
+@media (max-width:760px){ .imagineFig{padding:14px 14px 0} .imagineText{padding:0 20px 20px} }
+.imagine{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.imagineFig img{max-height:clamp(200px,17vw,280px);width:auto;max-width:100%;margin:0 auto}
+@media (max-width:760px){ .imagineFig img{max-height:none;width:100%} }
+
+/* Go further: shorter cards; the Play title runs the full width above the art */
+.ctas .cta{padding:22px 24px}
+.cta.ctaPlay{padding-right:24px;min-height:0}
+.cta.ctaPlay h3{white-space:nowrap}
+.cta.ctaPlay p{max-width:48%}
+.cta.ctaPlay .ctaArt{width:50%;right:0;bottom:0}
+@media (max-width:760px){ .cta.ctaPlay h3{white-space:normal} .cta.ctaPlay p{max-width:none} .cta.ctaPlay .ctaArt{width:100%;margin:8px 0 -22px} }
+
+/* video list: as tall as the player, scrolling inside */
+@media (min-width:861px){ .library{align-items:start} .playlist{overflow-y:auto} }
+.cta.ctaPlay p{max-width:56%}
+.cta.ctaPlay .ctaArt{width:42%;right:14px;bottom:14px;top:auto}
+@media (max-width:760px){ .cta.ctaPlay p{max-width:none} .cta.ctaPlay .ctaArt{width:100%;margin:8px 0 0} }
+
+/* reels, abstract, What's new and the elephant band share one width */
+.ideas,.imagine{max-width:var(--wide)}
+main.content > #ideas > .lead{max-width:var(--wide)}
+.imagineFig img{max-height:clamp(200px,19vw,320px)}
+/* the band is always dark, so its button stays white in day too */
+.imagine a.playBtn,html[data-theme="light"] .imagine a.playBtn{background:#fff;color:#14181A;border-color:#fff}
+
+/* ---------- body text scales with the screen ----------
+   Sizes match the 1440 px design and grow on bigger screens (about a third
+   larger at 2560 px), never shrinking below what reads well on a laptop. */
+.clip figcaption{font-size:clamp(14.5px,1vw,19px)}
+.clip figcaption b{font-size:clamp(15.5px,1.08vw,20.5px)}
+.idea b{font-size:clamp(17px,1.25vw,24px)}
+.ideaSum{font-size:clamp(14.5px,1vw,18.5px)}
+.ideaMore{font-size:clamp(13.5px,.94vw,17px)}
+.ideaPanel .prose,.scaleRow .prose,#idea-scalable .takeaway{font-size:clamp(16px,1.15vw,21px)}
+.mode p,.mode span{font-size:clamp(14.5px,1vw,18.5px)}
+.mode h4{font-size:clamp(19px,1.3vw,24px) !important}
+.player figcaption{font-size:clamp(15px,1.04vw,19px)}
+.player figcaption b{font-size:clamp(17px,1.18vw,22px)}
+.playlist b{font-size:clamp(15.5px,1.08vw,20px)}
+.playlist span{font-size:clamp(13px,.9vw,16.5px)}
+.cta h3{font-size:clamp(24px,1.67vw,32px)}
+.cta p{font-size:clamp(15.5px,1.08vw,20px)}
+.cta .go{font-size:clamp(15px,1.04vw,19px)}
+.imagineText p:not(.imagineTag){font-size:clamp(15px,1.15vw,21px)}
+main.content > #imagine .imagineText h2{font-size:clamp(22px,2.1vw,40px)}
+.imagineTag{font-size:clamp(12px,.83vw,15px)}
+.bib{font-size:clamp(12.5px,.87vw,16px)}
+.foot .in{font-size:clamp(14px,.97vw,17.5px)}
+.footLinks{font-size:clamp(15px,1.04vw,19px)}
+.footNote{font-size:clamp(12.5px,.87vw,15.5px)}
+.footDev{font-size:clamp(11.5px,.8vw,14px)}
+main.content > .sec h2{font-size:clamp(28px,2.9vw,56px)}
+/* the band's button, sized like the hero's Play button and scaling with the screen */
+.imagineText a.playBtn{font-size:clamp(16px,1.15vw,21px);padding:.78em 1.6em}
+.imagineText a.playBtn{white-space:nowrap}
+/* citation: same width as the other landing blocks, text that scales */
+main.content > #cite .bibwrap{max-width:var(--wide)}
+main.content > #cite .bibwrap pre{font-size:clamp(13.5px,1vw,18px);padding:clamp(14px,1.4vw,24px) clamp(16px,1.7vw,30px)}
+main.content > #cite .copy{font-size:clamp(13px,.9vw,16px)}
+body.paperpage #cite .bibwrap{max-width:none}
+body.paperpage #cite .bibwrap pre{font-size:clamp(13.5px,1vw,18px)}
+
+/* ---------- one content width for every landing block ----------
+   Every block now uses the section's full content column, the same width as
+   the clip grids. The reels follow it too, unless the window is too short for
+   three tall reels at that width; then they size to fit the screen's height,
+   centred, so all three are always seen whole. */
+:root{--wide:100%}
+main.content > .sec .reels{max-width:min(100%, calc(3 * (100vh - 130px) * 9 / 16 + 2 * clamp(12px,1.2vw,26px)))}
+
+/* ---------- footer, Play card and elephant band follow day / night ----------
+   Night keeps them black. Day turns them to the page's own light panel, and
+   the elephant swaps to its day-palette render (both are transparent). */
+.elD{display:none !important}
+html[data-theme="light"] .elN{display:none !important}
+html[data-theme="light"] .elD{display:block !important}
+
+html[data-theme="light"] .foot{background:var(--panel);color:var(--muted);border-top:1px solid var(--rule)}
+html[data-theme="light"] .foot a{color:var(--ink)}
+html[data-theme="light"] .footNote,
+html[data-theme="light"] .footDev{color:var(--muted)}
+
+html[data-theme="light"] .imagine{background:#B9BCBF;color:var(--ink);box-shadow:none}
+html[data-theme="light"] .imagineText p:not(.imagineTag){color:#2E3438}
+html[data-theme="light"] .imagineTag{color:#B32A22}
+html[data-theme="light"] .imagine a.playBtn{background:#14181A;color:#F3F6F4;border-color:#14181A}
+
+html[data-theme="light"] .cta.ctaPlay{background:#B9BCBF;color:var(--ink);border:1.5px solid transparent}
+html[data-theme="light"] .cta.ctaPlay p{color:#2E3438}
+html[data-theme="light"] .cta.ctaPlay .go{background:#14181A;color:#F3F6F4}
+/* Day: the banners sit quietly on the page, a shade off the panel colour */
+html[data-theme="light"] .imagine,
+html[data-theme="light"] .cta.ctaPlay{background:#E3E7E4;border:1.5px solid var(--rule)}
+html[data-theme="light"] .imagineText p:not(.imagineTag),
+html[data-theme="light"] .cta.ctaPlay p{color:var(--muted)}
+
+/* ---------- banners: the robots always sit in a black window ----------
+   The card itself follows the theme; the picture keeps the Play stage's black. */
+.imagineFig{background:#0A0B0B}
+html[data-theme="light"] .imagineFig{border-radius:12px;margin:clamp(10px,1.2vw,16px) 0 clamp(10px,1.2vw,16px) clamp(10px,1.2vw,16px);padding:clamp(8px,1vw,16px)}
+.cta.ctaPlay .ctaArt{background:#0A0B0B;border-radius:12px}
+html[data-theme="light"] .cta.ctaPlay .ctaArt{padding:6px}
+@media (max-width:760px){ html[data-theme="light"] .imagineFig{margin:12px 12px 0} }
+
+/* Play card laid out like the elephant band: text on the left, the black
+   robot window filling the right half, inset from the card's edge */
+.cta.ctaPlay{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);grid-template-rows:auto auto 1fr;
+  column-gap:clamp(14px,1.6vw,26px);padding:22px clamp(12px,1.2vw,16px) clamp(12px,1.2vw,16px) 24px;min-height:0}
+.cta.ctaPlay h3{grid-column:1;grid-row:1;white-space:normal}
+.cta.ctaPlay p{grid-column:1;grid-row:2;max-width:none}
+.cta.ctaPlay .go{grid-column:1;grid-row:3;align-self:start;justify-self:start}
+.cta.ctaPlay .ctaArt{position:static;grid-column:2;grid-row:1 / span 3;width:100%;height:100%;min-height:150px;
+  object-fit:contain;background:#0A0B0B;border-radius:12px;padding:6px;margin:0;right:auto;bottom:auto;box-sizing:border-box;align-self:stretch}
+html[data-theme="light"] .cta.ctaPlay .ctaArt{padding:6px}
+html[data-theme="dark"] .cta.ctaPlay .ctaArt{padding:0}
+@media (max-width:760px){
+  .cta.ctaPlay{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;padding:22px 16px 16px 20px}
+  .cta.ctaPlay h3,.cta.ctaPlay p,.cta.ctaPlay .go{grid-column:1;grid-row:auto}
+  .cta.ctaPlay .ctaArt{grid-column:1;grid-row:auto;height:auto;min-height:0;margin-top:14px}
+}
+/* title across the top, on one line; text and button left, window right */
+.cta.ctaPlay{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto 1fr;text-align:left}
+.cta.ctaPlay h3{grid-column:1 / -1;grid-row:1;white-space:nowrap;margin-bottom:10px}
+.cta.ctaPlay p{grid-row:2}
+.cta.ctaPlay .go{grid-row:3}
+.cta.ctaPlay .ctaArt{grid-row:2 / span 2;min-height:130px}
+@media (max-width:760px){
+  .cta.ctaPlay h3{white-space:normal;text-align:left}
+  .cta.ctaPlay .ctaArt{grid-row:auto}
+}
+main.content > .sec .cta.ctaPlay h3{margin:0 0 10px;justify-self:start;text-align:left}
+@media (max-width:760px){
+  .cta.ctaPlay{grid-template-columns:minmax(0,1fr);grid-template-rows:none}
+  .cta.ctaPlay .ctaArt{grid-column:1;grid-row:auto;height:auto;min-height:0;margin-top:14px}
+}
+
+/* ---------- Build guide: one text width, justified ---------- */
+.guide .sec .prose,.guide .sec .lead,.guide .ph,.guide .tblwrap,.guide .tbl,.guide ol.steps,
+.guide .cadNote,.guide .parts{max-width:none}
+.guide .sec .prose,.guide .sec .lead,.guide .sec .prose p,.guide ol.steps p,.guide .ph,
+.guide .cadNote p,.guide .parts dd{text-align:justify;hyphens:auto}
+.guide .tbl{width:100%}
+.parts{margin:16px 0 22px;padding:0;display:grid;gap:0;border-top:1px solid var(--rule)}
+.parts > div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.parts dt{font-weight:700}
+.parts dd{margin:0;color:var(--ink)}
+@media (max-width:560px){ .parts > div{grid-template-columns:minmax(0,1fr);gap:2px} }
+/* figure pairs sized so both pictures come out the same height */
+.split.figpair{align-items:stretch}
+.split.figpair.asm{grid-template-columns:minmax(0,1fr) minmax(0,1.88fr)}
+.split.figpair.elec{grid-template-columns:minmax(0,1.36fr) minmax(0,1.81fr)}
+@media (max-width:760px){ .split.figpair.asm,.split.figpair.elec{grid-template-columns:minmax(0,1fr)} }
+
+/* ---------- CAD download cards ---------- */
+.files .file{display:flex;flex-direction:column;gap:6px;border-style:solid}
+.files .file > span{flex:1}
+.fileActs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.fileActs .dl{display:inline-flex;align-items:baseline;gap:8px;padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--paper);
+  text-decoration:none;font-weight:600;font-size:14px}
+.fileActs .dl small{font-weight:400;opacity:.75;font-size:12px}
+.fileActs .guideBtn{font-size:14px;padding:7px 14px}
+.files .file.all{border-color:var(--ink)}
+dialog.lightbox img{max-height:80vh;object-fit:contain}
+.fileActs .dl{margin-top:0}
+.gimg.zoomable{cursor:zoom-in}
+
+/* phones: the elephant band stacks (picture over text), and long justified
+   paragraphs go left-aligned so narrow lines don't open big word gaps */
+@media (max-width:760px){
+  .imagine{grid-template-columns:minmax(0,1fr) !important}
+  .imagineText{padding:4px 20px 22px !important;text-align:center}
+  main.content > #imagine .imagineText h2{text-align:center}
+  .imagineFig img{max-height:none;width:100%}
+}
+@media (max-width:600px){
+  main.content > #abstract .lead,
+  .guide .sec .prose,.guide .sec .prose p,.guide ol.steps p,.guide .ph,.guide .cadNote p,.guide .parts dd,
+  body.paperpage .pfig .explain,#idea-scalable .scaleRow .prose{text-align:left}
+}
+
+/* ---------- "Coming soon" placeholder (pre-publication version) ---------- */
+.soonBox{margin:8px auto 0;max-width:820px;border:1.5px dashed var(--rule);border-radius:16px;padding:clamp(22px,3vw,40px);text-align:center}
+.soonTag{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.soonBox h2{margin:0 0 12px}
+.soonBox p{margin:0 auto;max-width:60ch;line-height:1.6;color:var(--muted)}
+.soonBox .pills{margin-top:20px}
+body.soonpage{display:flex;flex-direction:column;min-height:100vh}
+body.soonpage > main{flex:1 0 auto}
+
+/* ---------- reels: capped below the content width ----------
+   The reels are 720 px wide, so capped at 400 CSS px each (sharp on
+   a 2× screen) they only get softer. They stay centred and still shrink to fit
+   short windows. */
+main.content > .sec .reels{max-width:min(100%, calc(3 * 400px + 2 * clamp(12px,1.2vw,26px)), calc(3 * (100vh - 130px) * 9 / 16 + 2 * clamp(12px,1.2vw,26px)));margin-left:auto;margin-right:auto}
+
+/* ---------- a little more air between the big landing sections ----------
+   One robot → Cooperative manipulation → Cooperative locomotion →
+   Real-world tasks → Videos → Go further → Citation. Scales with the screen. */
+main.content > #manipulation,
+main.content > #locomotion,
+main.content > #tasks,
+main.content > #videos,
+main.content > #next,
+main.content > #cite{padding-top:clamp(72px,5.6vw,108px)}

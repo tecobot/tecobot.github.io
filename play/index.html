@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play with TeCoBots</title>
+<meta name="description" content="Drive tensegrity continuum robots by their cables and explore the 20 single- and multi-robot configurations from the TeCoBot paper.">
+<script>
+  /* Night unless the visitor has chosen day; set before anything draws. */
+  (function(){ var t=null; try{ t=localStorage.getItem('tecobot-theme'); }catch(e){}
+    document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark'); })();
+</script>
+<meta property="og:title" content="Play with TeCoBots">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tecobot.github.io/play/">
+<meta property="og:image" content="https://tecobot.github.io/media/og-elephant.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Six TeCoBots docked into an elephant">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tecobot.github.io/media/og-elephant.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tecobot.css">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="playpage">
+<header class="topbar"><div class="in">
+  <a class="brand" href="../">TeCoBot</a>
+  <nav aria-label="Site">
+    <a href="../">Overview</a>
+    <a href="./" aria-current="page">Play</a>
+    <a href="../build/">Build</a>
+    <a class="wideOnly" href="../paper/">Paper</a>
+    <a class="wideOnly" href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
+  </nav>
+  <div class="themeSwitch" role="group" aria-label="Theme">
+    <button type="button" data-set-theme="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Day</span></button>
+    <button type="button" data-set-theme="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span>Night</span></button>
+  </div>
+</div></header>
+<div class="wrap">
+  <div class="pageHead">
+    <h1>Play with TeCoBots</h1>
+  </div>
+
+  <div class="layout">
+    <div class="view" id="view">
+      <canvas id="c" role="img" aria-label="TeCoBot tensegrity continuum robots arranged in a selectable morphology"></canvas>
+      <div class="tag" id="tag"></div>
+      <p class="caveat">for visualization purposes</p>
+    </div>
+    <div class="side" id="side">
+      <h2>Robot</h2>
+      <div class="row"><span>Carbon-fibre rod</span><span id="f-rod"></span></div>
+      <div class="row"><span>Spacer disk</span><span id="f-disk"></span></div>
+      <div class="row"><span>Modules</span><span id="f-mod"></span></div>
+      <div class="row"><span>Body length</span><span id="f-body"></span></div>
+      <div class="row"><span>Overall length</span><span id="f-total"></span></div>
+    </div>
+  </div>
+
+  <div id="below">
+  <div class="controls">
+    <label>Category
+      <select id="cat"></select>
+    </label>
+    <label>Configuration
+      <select id="morph"></select>
+    </label>
+    <label>Palette
+      <select id="pal">
+        <option value="studio">Studio (on black)</option>
+        <option value="paper">Paper (light)</option>
+        <option value="day">Day (on grey)</option>
+      </select>
+    </label>
+    <label>Zoom <input type="range" id="zoom" min="60" max="500" value="100"></label>
+    <button type="button" id="labels">Key</button>
+    <button type="button" id="freerot" title="Let the view tip past its normal limits">Free Move</button>
+    <button type="button" id="panmode" title="Drag to pan instead of orbit">Pan</button>
+    <button type="button" class="primary" id="save" hidden>Save PNG</button>
+  </div>
+  <div class="controls rig" id="rig" hidden>
+    <strong class="riglabel">Frame</strong>
+    <label>Width <input type="range" id="rig-w" min="25" max="170" value="100"><output id="rig-w-o"></output></label>
+    <label>Depth <input type="range" id="rig-d" min="25" max="220" value="100"><output id="rig-d-o"></output></label>
+    <label>Height <input type="range" id="rig-h" min="50" max="180" value="100"><output id="rig-h-o"></output></label>
+    <span class="rigsep"></span>
+    <strong class="riglabel">Stations</strong>
+    <span id="rig-st"></span>
+    <button type="button" id="rig-reset">Reset frame</button>
+  </div>
+  <div class="controls rig" id="cab" hidden>
+    <strong class="riglabel">Cables</strong>
+    <label>Robot <select id="cab-r"></select></label>
+    <label>1 <input type="range" id="cab-1" min="-20" max="140" value="0"><output id="cab-1-o"></output></label>
+    <label>2 <input type="range" id="cab-2" min="-20" max="140" value="0"><output id="cab-2-o"></output></label>
+    <label>3 <input type="range" id="cab-3" min="-20" max="140" value="0"><output id="cab-3-o"></output></label>
+    <button type="button" id="cab-reset">Reset cables</button>
+  </div>
+  <p class="desc" id="desc"></p>
+  <p class="note warn" id="rig-note" hidden></p>
+  <details class="about"><summary>About this page</summary>
+  <p class="note">Drag to orbit, wheel to zoom. <strong>Key</strong> names the parts on the robot
+  itself. <strong>Frame</strong> resizes the cuboid and slides each docking station along the edge
+  it is bolted to. <strong>Cables</strong> drives a robot by its three cable displacements: pull all
+  three together and the body shortens dead straight, pull them unevenly and the difference is what
+  bends it.</p>
+  <p class="note">Where a configuration does not offer the control of one of its robots, that
+  robot&rsquo;s pose is held fixed so a dock cannot come apart under the sliders &mdash; the
+  hardware has no such
+  restriction, and can be driven in ways this page does not reproduce. Nothing here checks for
+  collision. Every dimension comes from the <code>MM</code> block at the top of the source; correct
+  a number there and the whole model follows.</p></details>
+  </div>
+</div>
+<script>
+  // the renderer's palette follows the theme from the first frame
+  document.getElementById('pal').value = document.documentElement.getAttribute('data-theme') === 'light' ? 'day' : 'studio';
+</script>
+<footer class="foot"><div class="in">
+  <nav class="footLinks" aria-label="Footer">
+    <a href="../play/">Play with TeCoBots</a>
+    <a href="../paper/">Paper</a>
+    <a href="../build/">Build</a>
+    <a href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
+    <a href="https://www.engr.colostate.edu/laboratories/adaptive-robotics-laboratory" target="_blank" rel="noopener">Adaptive Robotics Lab</a>
+  </nav>
+  <!-- RELEASE DAY: figures are the preprint (arXiv) versions; check the licence to publish before swapping in journal versions -->
+  <p class="footNote">© 2026 the authors · Code: <a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT</a></p>
+  <p class="footNote">Adaptive Robotics Lab, Department of Mechanical Engineering, Colorado State University, Fort Collins, CO, USA</p>
+  <p class="footDev">Developed by <a href="https://mahmud-hasans.github.io/" target="_blank" rel="noopener">Mahmud Hasan Saikot</a> with <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></p>
+</div></footer>
+<script src="../assets/tecobot.js"></script>
+<script src="../assets/site.js"></script>
+<script data-goatcounter="https://tecobot.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
