@@ -783,7 +783,6 @@ dialog.lightbox img{max-height:80vh;object-fit:contain}
   .imagineFig img{max-height:none;width:100%}
 }
 @media (max-width:600px){
-  main.content > #abstract .lead,
   .guide .sec .prose,.guide .sec .prose p,.guide ol.steps p,.guide .ph,.guide .cadNote p,.guide .parts dd,
   body.paperpage .pfig .explain,#idea-scalable .scaleRow .prose{text-align:left}
 }
@@ -812,3 +811,6 @@ main.content > #tasks,
 main.content > #videos,
 main.content > #next,
 main.content > #cite{padding-top:clamp(72px,5.6vw,108px)}
+
+/* abstract: justified on phones too (hyphenation keeps the gaps small) */
+@media (max-width:600px){ main.content > #abstract .lead{text-align:justify;hyphens:auto;-webkit-hyphens:auto} }

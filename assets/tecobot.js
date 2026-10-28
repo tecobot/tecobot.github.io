@@ -439,6 +439,7 @@
       return { base: place(R, -BASE_H, 0, 0), top: place(R, R.sb + TOP_H, 0, 0) };
     });
   };
+  window.__setView = function(az, el){ cam.az = az; cam.el = el; draw(); };   // used by eleph.py renders
   window.__view = function(){
     return { el: Math.round(cam.el*1000)/1000, az: Math.round(cam.az*1000)/1000,
              focus: FOCUS.map(function(v){ return Math.round(v*100)/100; }),
@@ -1587,7 +1588,8 @@
       cab0:[ null, [29, 78, -20], [29, 78, -20], [29, 78, -20], [29, 78, -20], [-20, 53, 53] ],
       desc:'The four-legged walker of C5 with a sixth robot clamped on the front claw’s free finger, curling forward and down as a trunk. Six robots, one spine, four legs and a trunk: an elephant. A conceptual shape.',
       label:'C6 — elephant (six robots)',
-      cam:{az:-0.5, el:0.3},
+      cam:{az:-3.855, el:0.147},
+      focus:[-1.04, 1.21, 7.57],   // the opening view, set by hand in Play (__view())
       zoom:1.0,
       conn:'claw–claw 3-to-1 ×5',
       build:function(){ return walker(true); }
@@ -2107,6 +2109,7 @@
     var mny=Math.min.apply(null,ys), mxy=Math.max.apply(null,ys);
     var mnz=Math.min.apply(null,zs), mxz=Math.max.apply(null,zs);
     FOCUS = [(mnx+mxx)/2, (mny+mxy)/2, (mnz+mxz)/2];
+    if(MORPHS[key].focus) FOCUS = MORPHS[key].focus.slice();   // a hand-set view keeps its own centre
     SPAN = Math.max(mxx-mnx, mxy-mny, mxz-mnz) + CLAW_L*1.25 + DISK_R*1.6;
     caption(key);
     readout();
