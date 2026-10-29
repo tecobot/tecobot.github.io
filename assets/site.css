@@ -814,3 +814,40 @@ main.content > #cite{padding-top:clamp(72px,5.6vw,108px)}
 
 /* abstract: justified on phones too (hyphenation keeps the gaps small) */
 @media (max-width:600px){ main.content > #abstract .lead{text-align:justify;hyphens:auto;-webkit-hyphens:auto} }
+
+/* ---------- Play controls on phones ----------
+   Each dropdown and slider gets its own full-width row: the label on the left
+   (one shared column, so the controls line up), the control filling the rest,
+   any readout on the right. Buttons wrap onto their own centred line, so
+   "Reset cables" sits alone under the sliders. Phones in landscape get the
+   same layout, kept to a readable width in the middle. */
+@media (max-width:600px), (orientation:landscape) and (max-height:500px){
+  body.playpage #below .controls{justify-content:center;gap:10px 10px}
+  body.playpage #below .controls > label,
+  body.playpage #below #rig-st > label{flex:1 1 100%;display:grid;grid-template-columns:98px minmax(0,1fr) auto;
+    align-items:center;gap:0 10px;text-align:left}
+  body.playpage #below #rig-st{display:contents}
+  body.playpage #below .controls select{max-width:none;width:100%;min-width:0}
+  body.playpage #below .controls input[type=range],
+  body.playpage #below #zoom{width:100%;min-width:0;margin:0}
+  body.playpage #below .rig output{width:64px;min-width:0;text-align:right;white-space:nowrap}
+  body.playpage #below .riglabel{flex:1 1 100%;text-align:center;margin-top:4px}
+  body.playpage #below .rigsep{display:none}
+}
+
+/* ---------- phone in landscape ----------
+   Reels: sized to nearly the full screen height (under the top bar) rather
+   than leaving a large margin, so they read bigger. */
+@media (orientation:landscape) and (max-height:500px){
+  main.content > .sec .reels{max-width:min(100%, calc(3 * (100vh - 64px) * 9 / 16 + 2 * clamp(12px,1.2vw,26px)))}
+}
+@media (orientation:landscape) and (max-height:500px){
+  body.playpage #below .controls{max-width:600px;margin-left:auto;margin-right:auto}
+}
+/* phones: Zoom, Free Move and Pan share one line; the slider takes what the
+   two buttons leave, and the button labels never wrap */
+@media (max-width:600px), (orientation:landscape) and (max-height:500px){
+  body.playpage #below .controls > label:has(#zoom){flex:1 1 0;min-width:0;display:flex;gap:8px}
+  body.playpage #below .controls > label:has(#zoom) #zoom{flex:1 1 auto;width:auto;min-width:60px}
+  body.playpage #below #freerot,body.playpage #below #panmode{flex:none;white-space:nowrap;padding:8px 13px}
+}

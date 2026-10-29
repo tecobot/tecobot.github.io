@@ -1643,6 +1643,7 @@
      the exported file, which made its height a consequence of its width; capping
      that height to fit a laptop then dragged the width down with it and left a
      narrow column. Unpinned, a wide screen gets a wide stage. */
+  var HERO_BAND = 300;               // phones: the least height kept for the robot above the type (was 330; trimmed so the buttons fit the first screen)
   function resize(){
     DPR = Math.min(window.devicePixelRatio||1, 2);
     var view = canvas.parentNode;
@@ -1665,7 +1666,7 @@
       var ih = inner ? inner.offsetHeight : 480;
       // fills the window under the top bar; grows only if the type needs more
       if(heroWide()) H = Math.max(ih + 56, window.innerHeight - barH);
-      else H = Math.max(ih + 330, window.innerHeight - barH);
+      else H = Math.max(ih + HERO_BAND, window.innerHeight - barH);
       W = full;
     } else {
       var top = view.getBoundingClientRect().top + window.scrollY;
@@ -1676,7 +1677,11 @@
       var stacked = !sideEl.hidden &&
         getComputedStyle(document.querySelector('.layout')).gridTemplateColumns.split(' ').length < 2;
       var budget = window.innerHeight - top - below - (stacked ? sideEl.offsetHeight + 16 : 0) - 26;
-      W = full;
+      /* On a touch screen a drag on the stage turns the robots, so the stage
+         stops short of the edges and leaves a strip each side to scroll by. */
+      var gut = (window.matchMedia && matchMedia('(pointer:coarse)').matches && window.innerWidth < 1100)
+                ? Math.round(Math.min(48, full*0.07)) : 0;
+      W = full - 2*gut;
       H = Math.max(300, Math.min(budget, Math.round(W*0.8)));
     }
     view.style.width = W + 'px';
@@ -1708,8 +1713,12 @@
     if(!heroWide()){
       // the robot gets the band above the type, centred in it and scaled to it
       var tb = document.querySelector('.splashInner'), band = H - (tb ? tb.offsetHeight : 480) - H*0.03;
-      HERO_Z = Math.max(0.8, Math.min(1.15, 0.88*band/330, 0.88*W/390));
-      HCEN = 0.5; VCEN = Math.max(165, band/2)/H; return;
+      /* scaled to the band itself (the robot's measured extent is 0.742 x
+         0.92 x min(W,H) x zoom), with a margin above and below, so it never
+         reaches the top bar or the title, in portrait or landscape */
+      var ext = 0.742*Math.min(W, H)*0.92, m = Math.max(18, band*0.07);
+      HERO_Z = Math.max(0.4, Math.min(1.15, 0.88*W/390, (band - 2*m)/ext));
+      HCEN = 0.5; VCEN = (band/2)/H; return;
     }
     var inner = document.querySelector('.splashInner'), vb = canvas.getBoundingClientRect();
     var textR = inner ? inner.getBoundingClientRect().right - vb.left : W*0.4;
@@ -2528,9 +2537,30 @@
        pointer capture redirects the click that follows to the capture target,
        so grabbing every pointerdown here swallowed the splash button. */
     if(splashing || e.target.closest('.splashInner')) return;
-    dragging=true; px=e.clientX; py=e.clientY; view.setPointerCapture(e.pointerId);
+    view.setPointerCapture(e.pointerId);
+    touches[e.pointerId] = [e.clientX, e.clientY];
+    var ids = Object.keys(touches);
+    if(ids.length === 2){
+      // a second finger turns the gesture into a pinch: zoom only, no orbit
+      dragging = false; pinch = { d: tdist(), z: zoomF };
+      return;
+    }
+    if(ids.length > 2) return;
+    dragging=true; px=e.clientX; py=e.clientY;
   });
+  /* Pinch to zoom on touch screens: the zoom follows the change in distance
+     between two fingers, the same way the wheel scales it on a desktop. */
+  var touches = {}, pinch = null;
+  function tdist(){
+    var v = Object.keys(touches).slice(0, 2).map(function(k){ return touches[k]; });
+    return Math.max(1, Math.hypot(v[0][0]-v[1][0], v[0][1]-v[1][1]));
+  }
   view.addEventListener('pointermove', function(e){
+    if(touches[e.pointerId]) touches[e.pointerId] = [e.clientX, e.clientY];
+    if(pinch && Object.keys(touches).length >= 2){
+      zoomF = Math.max(0.6, Math.min(5, pinch.z * tdist()/pinch.d));
+      syncSliders(); draw(); return;
+    }
     if(!dragging) return;
     if(panMode){
       /* Pan by sliding the point the camera looks at, in the plane of the
@@ -2552,7 +2582,11 @@
     cam.el = Math.max(lo, Math.min(hi, cam.el + (e.clientY-py)*0.005));
     px=e.clientX; py=e.clientY; syncSliders(); draw();
   });
-  ['pointerup','pointercancel'].forEach(function(n){ view.addEventListener(n, function(){ dragging=false; }); });
+  ['pointerup','pointercancel'].forEach(function(n){ view.addEventListener(n, function(e){
+    delete touches[e.pointerId];
+    if(Object.keys(touches).length < 2) pinch = null;
+    dragging = false;   // lifting one finger of a pinch does not start an orbit
+  }); });
 
   /* Wheel zoom. Multiplicative, so one notch covers the same proportion of the
      range wherever you are in it, and the page itself is kept from scrolling. */
