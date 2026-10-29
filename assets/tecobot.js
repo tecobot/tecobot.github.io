@@ -1677,9 +1677,11 @@
       var stacked = !sideEl.hidden &&
         getComputedStyle(document.querySelector('.layout')).gridTemplateColumns.split(' ').length < 2;
       var budget = window.innerHeight - top - below - (stacked ? sideEl.offsetHeight + 16 : 0) - 26;
-      /* On a touch screen a drag on the stage turns the robots, so the stage
-         stops short of the edges and leaves a strip each side to scroll by. */
-      var gut = (window.matchMedia && matchMedia('(pointer:coarse)').matches && window.innerWidth < 1100)
+      /* On a touch screen in landscape a drag on the stage turns the robots and
+         the stage fills most of the screen, so it stops short of the edges and
+         leaves a strip each side to scroll by. Portrait keeps the full width. */
+      var gut = (window.matchMedia && matchMedia('(pointer:coarse)').matches && window.innerWidth < 1100
+                 && window.innerWidth > window.innerHeight)
                 ? Math.round(Math.min(48, full*0.07)) : 0;
       W = full - 2*gut;
       H = Math.max(300, Math.min(budget, Math.round(W*0.8)));
