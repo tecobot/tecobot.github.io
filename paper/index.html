@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Paper · TeCoBot</title>
 <meta name="description" content="Tensegrity Continuum Robots Enable Task-Adaptive Morphologies for Cooperative Behaviors: the paper's figures, explained.">
@@ -32,8 +31,7 @@
   <nav aria-label="Site">
     <a href="../">Overview</a>
     <a href="../play/">Play</a>
-    <a href="../build/">Build</a>
-    <a class="wideOnly" href="./" aria-current="page">Paper</a>
+    <a href="./" aria-current="page">Paper</a>
     <a class="wideOnly" href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
   </nav>
   <div class="themeSwitch" role="group" aria-label="Theme">
@@ -47,22 +45,78 @@
   <h1 id="h-paper">Tensegrity Continuum Robots Enable Task-Adaptive Morphologies for Cooperative Behaviors</h1>
   <p class="pAuthors"><a href="https://mahmud-hasans.github.io/" target="_blank" rel="noopener">M. H. Saikot</a>, S. Spiegel, S. A. Kariyawasam, A. Stefka, J. Chrisler, J. Zhao</p>
   <p class="pAffil">Adaptive Robotics Lab, Department of Mechanical Engineering, Colorado State University, Fort Collins, CO, USA</p>
-  <p class="pVenue">Accepted for publication in a peer-reviewed journal</p>
+  <p class="pVenue"><a href="https://www.nature.com/articles/s42256-026-01335-4" target="_blank" rel="noopener"><i>Nature Machine Intelligence</i> (2026)</a></p>
   <div class="pills">
+    <a href="https://www.nature.com/articles/s42256-026-01335-4" target="_blank" rel="noopener">Article</a>
     <a href="https://arxiv.org/abs/2608.27221" target="_blank" rel="noopener">arXiv</a>
-    <a href="https://arxiv.org/pdf/2608.27221" target="_blank" rel="noopener">PDF</a>
+    <a href="https://www.nature.com/articles/s42256-026-01335-4.pdf" target="_blank" rel="noopener">PDF</a>
     <a href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
     <a href="#cite">Cite</a>
   </div>
-  <!-- RELEASE DAY: these are the preprint figures; check the licence to publish before replacing them with the journal's typeset versions -->
-
+  <p class="pHint">Figures are from the arXiv preprint (<a href="https://arxiv.org/abs/2608.27221" target="_blank" rel="noopener">arXiv:2608.27221</a>). Select a figure to see it full size.</p>
 </section>
 
-<section class="sec" aria-labelledby="h-soon">
-  <div class="soonBox">
-    <p class="soonTag">Coming soon</p>
-    <h2 id="h-soon">The paper, figure by figure</h2>
-    <p>Plain-language explainers for every figure will appear here when the article is published. Until then, the preprint is on arXiv.</p>
+<section class="sec pfig" id="fig1" aria-labelledby="h-fig1">
+  <h2 id="h-fig1"><span class="figNo">Figure 1</span>Overview</h2>
+  <figure class="paperfig big" data-zoom="../media/figs/fig1.jpg" data-alt="Figure 1: Overview" data-caption="Figure 1. Overview" tabindex="0" role="button" aria-label="Enlarge figure 1">
+    <img src="../media/figs/fig1-md.jpg" alt="Figure 1: Overview" loading="lazy">
+  </figure>
+  <div class="prose explain">
+    <p>The big picture. On its own, a TeCoBot can collapse, extend and bend in any direction, grab things with the claw at either end, and get around by rolling, inching, crawling or climbing inside a pipe (a). Next to other modular robots, it is unusual in being good at both handling objects and moving (b).</p>
+    <p>Several TeCoBots can join claw to claw or claw to body and rearrange themselves into new shapes, then work as a group: handling objects together, travelling together, or both at once, such as climbing onto a table and passing an object along (c).</p>
+  </div>
+</section>
+<section class="sec pfig" id="fig2" aria-labelledby="h-fig2">
+  <h2 id="h-fig2"><span class="figNo">Figure 2</span>How one robot is built</h2>
+  <figure class="paperfig big" data-zoom="../media/figs/fig2.jpg" data-alt="Figure 2: How one robot is built" data-caption="Figure 2. How one robot is built" tabindex="0" role="button" aria-label="Enlarge figure 2">
+    <img src="../media/figs/fig2-md.jpg" alt="Figure 2: How one robot is built" loading="lazy">
+  </figure>
+  <div class="prose explain">
+    <p>The body is four stacked tensegrity modules (a, b). Each module is six carbon-fibre rods held in place by one continuous, stretchy TPU tendon net. The rods take the squeeze and the tendon takes the pull, so the body can bend any way, collapse along its length and spring back.</p>
+    <p>Three cables, 120° apart, run through spacer disks from the base to the top, wound in and out by three geared motors in the base (c). Pull all three together and the body shortens; pull them unevenly and it bends toward the stronger pull.</p>
+    <p>A claw at each end is both a gripper and a connector (d). A worm gear drives its three fingers, so it keeps its grip without power. There are two versions: a rubber-sleeved claw for moving and docking, and a soft-pad claw for delicate objects. An ESP32 board in each robot takes Wi-Fi commands from a PC, so robots can be driven one at a time or in sync (e).</p>
+  </div>
+</section>
+<section class="sec pfig" id="fig3" aria-labelledby="h-fig3">
+  <h2 id="h-fig3"><span class="figNo">Figure 3</span>Testing the body, the claws and the model</h2>
+  <figure class="paperfig big" data-zoom="../media/figs/fig3.jpg" data-alt="Figure 3: Testing the body, the claws and the model" data-caption="Figure 3. Testing the body, the claws and the model" tabindex="0" role="button" aria-label="Enlarge figure 3">
+    <img src="../media/figs/fig3-md.jpg" alt="Figure 3: Testing the body, the claws and the model" loading="lazy">
+  </figure>
+  <div class="prose explain">
+    <p><b>Collapsing and bending (a–f).</b> A thicker tendon makes a module stiffer: the peak collapsing force goes from 17.5&nbsp;N with a 1×2&nbsp;mm tendon to 27.4&nbsp;N with 2×2&nbsp;mm, and only a little higher with 3×2&nbsp;mm, so TeCoBot uses 2×2&nbsp;mm (a, d). Stacking more modules lets the robot collapse farther, from 60&nbsp;mm with one to 260&nbsp;mm with four, and bend farther, from about 60° to 220°, while the force needed stays about the same: roughly 23–28&nbsp;N to collapse and 16–18&nbsp;N to bend (b, c, e, f).</p>
+    <p><b>How hard the claws hold (g–i).</b> Two claws locked finger between finger hold up to 42.9&nbsp;N with latex sleeves and 38.9&nbsp;N with silicone; the sleeve length barely matters (g). A claw gripping another robot’s body holds harder as its motor current rises, reaching 29.8&nbsp;N on the tendon net (h), and close to 20&nbsp;N on a docking station (i). Latex was chosen because it grips the body best.</p>
+    <p><b>Predicting the shape (j–l).</b> Treating the body as one smooth arc predicts where the tip ends up to within 1.9–6.4&nbsp;mm, or 0.8–3.0% of its length, across four cable patterns (j). The top view shows how the three cable pulls add up to set the direction of the bend (k), and the model’s arcs line up with photos of the robot (l).</p>
+  </div>
+</section>
+<section class="sec pfig" id="fig4" aria-labelledby="h-fig4">
+  <h2 id="h-fig4"><span class="figNo">Figure 4</span>Cooperative manipulation</h2>
+  <figure class="paperfig big" data-zoom="../media/figs/fig4.jpg" data-alt="Figure 4: Cooperative manipulation" data-caption="Figure 4. Cooperative manipulation" tabindex="0" role="button" aria-label="Enlarge figure 4">
+    <img src="../media/figs/fig4-md.jpg" alt="Figure 4: Cooperative manipulation" loading="lazy">
+  </figure>
+  <div class="prose explain">
+    <p>Three robots work on a frame with docking stations along its edges. They switch between four layouts by letting go, moving and re-docking one claw at a time, with no one touching them (a): all three hanging (M1), two hanging and one on the ground (M2), one hanging and two on the ground (M3), and all three in a line (M4).</p>
+    <p>Each layout suits a different job (b). In M1 the three bend inward together to lift a large ball. In M2 they pick up a test tube, pull the cork and pour into a beaker. In M3 the two on the ground hold a tissue roll steady while the one above tears off a sheet. In M4 the chain reaches a bottle too far away for any one robot.</p>
+  </div>
+</section>
+<section class="sec pfig" id="fig5" aria-labelledby="h-fig5">
+  <h2 id="h-fig5"><span class="figNo">Figure 5</span>Cooperative locomotion</h2>
+  <figure class="paperfig big" data-zoom="../media/figs/fig5.jpg" data-alt="Figure 5: Cooperative locomotion" data-caption="Figure 5. Cooperative locomotion" tabindex="0" role="button" aria-label="Enlarge figure 5">
+    <img src="../media/figs/fig5-md.jpg" alt="Figure 5: Cooperative locomotion" loading="lazy">
+  </figure>
+  <div class="prose explain">
+    <p>On the ground, robots detach and reattach to switch between four shapes (a): a straight chain (L1), a loop with a tail (L2), an H (L3) and a closed loop (L4).</p>
+    <p>Each shape moves in its own way (b, c). The chain stretches and shortens while its ends anchor in turn. The loop wraps a large ball and the tail inches the whole group forward. The H walks along the outside of a duct by pushing and pulling between its two sides. The closed loop wraps a large pipe and rolls along it.</p>
+  </div>
+</section>
+<section class="sec pfig" id="fig6" aria-labelledby="h-fig6">
+  <h2 id="h-fig6"><span class="figNo">Figure 6</span>Real-world tasks</h2>
+  <figure class="paperfig big" data-zoom="../media/figs/fig6.jpg" data-alt="Figure 6: Real-world tasks" data-caption="Figure 6. Real-world tasks" tabindex="0" role="button" aria-label="Enlarge figure 6">
+    <img src="../media/figs/fig6-md.jpg" alt="Figure 6: Real-world tasks" loading="lazy">
+  </figure>
+  <div class="prose explain">
+    <p>Two multi-step jobs that need the robots to change shape partway through. Each reads left to right: the starting scene and the goal, then six steps (i–vi), with drawings on top and photos of the real robots below.</p>
+    <p><b>Task A, study table cleanup (a, b).</b> Starting on the floor, two robots push the third up onto a 40&nbsp;cm table. It returns a pen to its holder, picks up scrap paper and hands it down to a robot on the floor, and the three link into a chain that carries the paper to the bin.</p>
+    <p><b>Task B, cabinet organization (c, d).</b> One robot opens a drawer, another docks to a wall station and lifts a motor out of a supply bin, and the motor is handed over, placed in the drawer and the drawer pushed shut.</p>
   </div>
 </section>
 
@@ -73,14 +127,15 @@
 
 <section class="sec" id="cite" aria-labelledby="h-cite">
   <h2 id="h-cite">Citation</h2>
-  <!-- RELEASE DAY: swap for the journal citation (volume, pages, DOI) -->
   <div class="bibwrap"><pre id="bibtex">@article{saikot2026tecobot,
   title   = {Tensegrity Continuum Robots Enable Task-Adaptive
              Morphologies for Cooperative Behaviors},
   author  = {Saikot, Mahmud Hasan and Spiegel, S. and Kariyawasam, S. A.
              and Stefka, A. and Chrisler, J. and Zhao, Jianguo},
-  journal = {arXiv preprint arXiv:2608.27221},
-  year    = {2026}
+  journal = {Nature Machine Intelligence},
+  year    = {2026},
+  doi     = {10.1038/s42256-026-01335-4},
+  url     = {https://www.nature.com/articles/s42256-026-01335-4}
 }</pre><button class="copy" type="button" data-target="bibtex">Copy</button></div>
 </section>
 </main>
@@ -89,11 +144,9 @@
   <nav class="footLinks" aria-label="Footer">
     <a href="../play/">Play with TeCoBots</a>
     <a href="../paper/">Paper</a>
-    <a href="../build/">Build</a>
     <a href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
     <a href="https://www.engr.colostate.edu/laboratories/adaptive-robotics-laboratory" target="_blank" rel="noopener">Adaptive Robotics Lab</a>
   </nav>
-  <!-- RELEASE DAY: figures are the preprint (arXiv) versions; check the licence to publish before swapping in journal versions -->
   <p class="footNote">© 2026 the authors · Code: <a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT</a></p>
   <p class="footNote">Adaptive Robotics Lab, Department of Mechanical Engineering, Colorado State University, Fort Collins, CO, USA</p>
   <p class="footDev">Developed by <a href="https://mahmud-hasans.github.io/" target="_blank" rel="noopener">Mahmud Hasan Saikot</a> with <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></p>

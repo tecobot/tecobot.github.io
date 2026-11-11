@@ -851,3 +851,17 @@ main.content > #cite{padding-top:clamp(72px,5.6vw,108px)}
   body.playpage #below .controls > label:has(#zoom) #zoom{flex:1 1 auto;width:auto;min-width:60px}
   body.playpage #below #freerot,body.playpage #below #panmode{flex:none;white-space:nowrap;padding:8px 13px}
 }
+
+/* phones: Frame and Stations fold behind one button, opened on tap */
+.rigToggle{display:none}
+@media (max-width:600px), (orientation:landscape) and (max-height:500px){
+  body.playpage #below .rigToggle{display:inline-flex;align-items:center;gap:8px;flex:none}
+  body.playpage #below .rigToggle::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+    transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+  body.playpage #below #rig.open .rigToggle::after{transform:translateY(2px) rotate(-135deg)}
+  body.playpage #below #rig:not(.open) > :not(.rigToggle){display:none !important}
+}
+.pHint a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
+/* Go further with a single card (the Play card) */
+.ctas.single{grid-template-columns:minmax(0,1fr)}

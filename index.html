@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TeCoBot</title>
 <meta name="description" content="Modular tensegrity continuum robots that bend, collapse, and team up by docking, self-reconfiguring into task-adaptive morphologies for cooperative manipulation and locomotion.">
@@ -35,8 +34,7 @@
   <nav aria-label="Site">
     <a href="./" aria-current="page">Overview</a>
     <a href="play/">Play</a>
-    <a href="build/">Build</a>
-    <a class="wideOnly" href="paper/">Paper</a>
+    <a href="paper/">Paper</a>
     <a class="wideOnly" href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
   </nav>
   <div class="themeSwitch" role="group" aria-label="Theme">
@@ -59,9 +57,9 @@
           <h1 class="splashTitle">TeCoBots</h1>
           <p class="splashSub">Modular tensegrity continuum robots that bend, collapse, and team up by docking.</p>
           <p class="paperLine">
-            <a class="paperTitle" href="https://arxiv.org/abs/2608.27221" target="_blank" rel="noopener">Tensegrity Continuum Robots Enable Task-Adaptive
+            <a class="paperTitle" href="https://www.nature.com/articles/s42256-026-01335-4" target="_blank" rel="noopener">Tensegrity Continuum Robots Enable Task-Adaptive
             Morphologies for Cooperative Behaviors</a><br>
-            <span class="paperVenue">Accepted for publication in a peer-reviewed journal</span>
+            <span class="paperVenue"><a href="https://www.nature.com/articles/s42256-026-01335-4" target="_blank" rel="noopener"><i>Nature Machine Intelligence</i> (2026)</a></span>
           </p>
           <p class="authors">
             <!-- add each author's page as an href when you have them -->
@@ -71,16 +69,14 @@
           <p class="affil">Adaptive Robotics Lab, Colorado State University</p>
           <div class="linkrow">
             <a href="https://arxiv.org/abs/2608.27221" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>arXiv</a>
-            <!-- RELEASE DAY: point PDF at the journal version, link the supplementary files, and drop class="soon" -->
-            <a href="https://arxiv.org/pdf/2608.27221" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>PDF</a>
+            <a href="https://www.nature.com/articles/s42256-026-01335-4.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>PDF</a>
             <a href="#videos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>Videos</a>
-            <a class="soon" aria-disabled="true" title="Available when the journal version is published"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h10l6 6v10H4z"/><path d="M8 13h8M8 17h5"/></svg>Supplementary</a>
+            <a href="https://www.nature.com/articles/s42256-026-01335-4#Sec-supplementary-information" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h10l6 6v10H4z"/><path d="M8 13h8M8 17h5"/></svg>Supplementary</a>
             <a href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>Code</a>
             <a href="#cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h4v6H5V9a2 2 0 0 1 2-2zM15 7h4v6h-6V9a2 2 0 0 1 2-2zM9 13c0 2-1 4-3 4M17 13c0 2-1 4-3 4"/></svg>Cite</a>
           </div>
           <div class="heroCtas">
             <a class="playBtn" id="play" href="play/">Play with TeCoBots</a>
-            <a class="ghostBtn" href="build/">Build one</a>
           </div>
           <p class="scrollCue">scroll to read more &darr;</p>
         </div>
@@ -186,7 +182,7 @@
           <p><b>A compliant body.</b> Four stacked tensegrity modules each contain six carbon-fibre rods held together by a stretchable TPU tendon net. Three cables control bending in any direction, compression, and extension along the body’s length.</p>
           <p><b>A claw at each end.</b> Each claw works as both a gripper and a connector. The claws can be swapped to suit the task: rubber-sleeved claws for docking and moving, or soft-pad grippers for picking up delicate objects.</p>
           <p><b>One robot or many.</b> Each TeCoBot can move and manipulate objects independently. Multiple robots can dock into chains, loops, and branches while remaining compliant, allowing the connected group to bend and roll as a single body.</p>
-          <p class="panelLinks"><a href="build/">How it’s built</a><a href="play/">Try it in Play</a></p>
+          <p class="panelLinks"><a href="paper/#fig2">How it’s built</a><a href="play/">Try it in Play</a></p>
         </div>
       </div>
     </div>
@@ -377,22 +373,22 @@
 
 <section class="sec" id="next" aria-labelledby="h-next">
   <h2 id="h-next">Go further</h2>
-  <div class="ctas">
+  <div class="ctas single">
     <a class="cta ctaPlay" href="play/"><h3>Play with TeCoBots</h3><p>Drive a robot by its three cables and explore 25+ configurations, from one module to six docked robots. Find the lizard and the elephant.</p><span class="go">Open Play</span><img class="ctaArt" src="media/figs/elephant-night.webp" alt="" loading="lazy"></a>
-    <a class="cta alt" href="build/"><h3>Build your own</h3><p>Dimensions, parts, CAD files, assembly, the kinematic model and the gait sequences.</p><span class="go">Read the guides</span></a>
   </div>
 </section>
 
 <section class="sec" id="cite" aria-labelledby="h-cite">
   <h2 id="h-cite">Citation</h2>
-  <!-- RELEASE DAY: swap for the journal citation (volume, pages, DOI) -->
   <div class="bibwrap"><pre id="bibtex">@article{saikot2026tecobot,
   title   = {Tensegrity Continuum Robots Enable Task-Adaptive
              Morphologies for Cooperative Behaviors},
   author  = {Saikot, Mahmud Hasan and Spiegel, S. and Kariyawasam, S. A.
              and Stefka, A. and Chrisler, J. and Zhao, Jianguo},
-  journal = {arXiv preprint arXiv:2608.27221},
-  year    = {2026}
+  journal = {Nature Machine Intelligence},
+  year    = {2026},
+  doi     = {10.1038/s42256-026-01335-4},
+  url     = {https://www.nature.com/articles/s42256-026-01335-4}
 }</pre><button class="copy" type="button" data-target="bibtex">Copy</button></div>
 </section>
 
@@ -402,11 +398,9 @@
   <nav class="footLinks" aria-label="Footer">
     <a href="play/">Play with TeCoBots</a>
     <a href="paper/">Paper</a>
-    <a href="build/">Build</a>
     <a href="https://github.com/mahmud-hasans/TeCoBot" target="_blank" rel="noopener">Code</a>
     <a href="https://www.engr.colostate.edu/laboratories/adaptive-robotics-laboratory" target="_blank" rel="noopener">Adaptive Robotics Lab</a>
   </nav>
-  <!-- RELEASE DAY: figures are the preprint (arXiv) versions; check the licence to publish before swapping in journal versions -->
   <p class="footNote">© 2026 the authors · Code: <a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT</a></p>
   <p class="footNote">Adaptive Robotics Lab, Department of Mechanical Engineering, Colorado State University, Fort Collins, CO, USA</p>
   <p class="footDev">Developed by <a href="https://mahmud-hasans.github.io/" target="_blank" rel="noopener">Mahmud Hasan Saikot</a> with <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></p>

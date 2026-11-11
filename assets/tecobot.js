@@ -2358,6 +2358,17 @@
       rigNoteEl = document.getElementById('rig-note');
   var RIGDIM = [['w','rig-w'], ['d','rig-d'], ['h','rig-h']];
   var rigInputs = [];
+  /* On phones the frame and station sliders start folded away behind one
+     button (CSS shows it only there), since most visitors never need them. */
+  var rigTog = document.createElement('button');
+  rigTog.type = 'button'; rigTog.className = 'rigToggle';
+  rigTog.setAttribute('aria-expanded', 'false'); rigTog.setAttribute('aria-controls', 'rig');
+  rigTog.textContent = 'Frame and stations';
+  rigEl.insertBefore(rigTog, rigEl.firstChild);
+  rigTog.addEventListener('click', function(){
+    var open = rigEl.classList.toggle('open');
+    rigTog.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
 
   function rigPanel(){
     var key = sel.value, spec = MORPHS[key].frame;
